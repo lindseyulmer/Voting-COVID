@@ -1,26 +1,20 @@
 #Background
 ## Covid and Elections
- The corona virus pandemic has created unprecedented circumstances in the United States, affecting every aspect of American life including the election process. Rising cases and concern over the government’s response to the pandemic could have greatly influenced how and who Americans voted for.
-Data on corona virus cases, election results, and proportion of mail in votes are all readily available, but corona virus and election data are not readily available in the same place for comparison.
+The corona virus pandemic has created unprecedented circumstances in the United States, affecting every aspect of American life including the election process. Rising cases and concern over the government’s response to the pandemic could have greatly influenced how and who Americans voted for. 
+Data on corona virus cases, election results, and proportion of mail in votes are all readily available, but corona virus and election data are not readily available in the same place for comparison. 
 Our goal is to visualize COVID-19 and election data in the same place so that people can more easily draw conclusions about how the pandemic affected American’s political views.
 #User Profile
-
+The user can be anyone who is interested in visualizing covid and election data. This can be anyone from people who work in public policy to just citizens who are interested in
+election or covid data. They do not need experience with python but should be comfortable using a jupyter notebook to create the figures.
 #Data Sources
-
+Covid case data will be downloaded from the cdc's website as a csv. 2016 vote by mail data will be downloaded from healthy elections.org as a csv. 2016 overall election results will be downloaded from the FEC as an excel spreadsheet. Poll data on covid as a voting issue will be downloaded from commonwealthfund.org as a csv. 2020 results will be copied from nbcnews.com as a csv. 2020 early voting data will be copied from the washingtonpost into a csv, and 2020 mail in voting data will be copied from the guardian into a csv. Some of this data had to be copied into spreadsheets instead of downloaded as a table because the data was not available in a downloadable format at the time of this project because results were still being finalized.
 # Use Cases
-## Use Case 1 Interactive Map for visulazing COVID and Election Data across all states
-- Read in Covid and Election data as data frames and merge to one data frame
-- Use Geopandas package to add state shapes to data frame
-- Use Bokeh to perform plotting/visualization (also to save plot to file)
-- Use Bokeh to make the plot interactive to better illustrate the data
-## Use Case 2 Interactive Map for visulazing Election Data from the 2020 and 2016 election across all states
-- Read in 2016 and 2020 election results and 2020 early voting turnout for all states as separate dataframes then merge to one
-- Use Geopandas package to add state shapes to data frame
-- Use Bokeh to perform plotting/visualization (also to save plot to file)
-- Use Bokeh to make the plot interactive to better illustrate the data
-## Use Case 3 Interactive Map for visualizing COVID cases, mail in voting data, and poll data for key swing states
-- Alter COVID case data dataframe to include only key swing states
-- Read in mail in voting data and poll data as separate dataframes and merge to one with the covid data
-- Use Geopandas package to add state shapes to data frame
-- Use Bokeh to perform plotting/visualization (also to save plot to file)
-- Use Bokeh to make the plot interactive to better illustrate the data
+## Use Case 1 User Creating Figure with Data that's preuploaded
+User will run existed jupyter notebook as is to generate the desired interactive map figure.
+## Use Case 2 User Adding Additional Data to Figures
+If the user had additional data they wanted in an interactive map, they could upload more data, and alter what columns in the combined dataframe are plotted to include their
+newly added data. Users doing this should have some experience with python and jupyter notebooks.
+## Use Case 3 User Interacting with Pre-generated Figures
+If a user was only interested in the data we uploaded in the view it was exported as, they could just download the figure and interact with it. This requires the least level of 
+familiarity with jupyter notebooks and python so is the most accesible.
+
