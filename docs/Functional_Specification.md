@@ -13,16 +13,16 @@ Data on coronavirus cases, election results, and the proportion of mail-in votes
 - <a href= 'https://www.nbcnews.com/politics/2020-elections/president-results'>2020 results</a>: 2020 results will be copied from nbcnews.com as a CSV.
 - <a href= 'https://www.washingtonpost.com/graphics/2020/elections/early-voting-numbers-so-far/'>2020 results</a>:  2020 early voting data will be copied from the washingtonpost into a CSV.
 - <a href= 'https://www.theguardian.com/us-news/2020/nov/04/mail-in-ballot-tracker-us-election-2020'>2020 mail-in voting data</a>: 2020 mail-in voting data will be copied from the guardian into a CSV.<br/>
-Some of this data had to be copied into spreadsheets instead of downloaded as a table because the data was not available in a downloadable format at the time of this project because results were still being finalized.
+(Some of this data had to be copied into spreadsheets instead of downloaded as a table because the data was not available in a downloadable format at the time of this project because results were still being finalized.)
 
 ## User Profile
 The user can be anyone who is interested in visualizing covid and election data. This can be anyone from people who work in public policy to just citizens who are interested in the election or covid data. They do not need experience with python but should be comfortable using a Jupyter Notebook to create the figures.
 
 ## Use Cases
-**- Use Case 1: User Creating Figure with Data that's preuploaded**<br/>
+### Use Case 1: User Creating Figure with Data that's preuploaded
 User will run existed Jupyter Notebook as is to generate the desired interactive map figure.
-**- Use Case 2: User Adding Additional Data to Figures**<br/>
+### Use Case 2: User Adding Additional Data to Figures
 If the user had additional data they wanted in an interactive map, they could upload more data, and alter what columns in the combined data frame are plotted to include their newly added data. Users doing this should have some experience with python and Jupyter Notebook.
-**- Use Case 3: User Interacting with Pre-generated Figures**<br/>
+### Use Case 3: User Interacting with Pre-generated Figures
 If a user was only interested in the data we uploaded in the view it was exported as, they could just download the figure and interact with it. This requires the least level of 
 familiarity with Jupyter Notebook and python so is the most accessible.
