@@ -1,6 +1,9 @@
+"""This module creates a base data set that add_data() build on.
+add_data(startdata,newdatafile,startdatastate, newdatastate, states, newfilename)
+The purpose of this module is to prepare data for visualization
+"""
 #Import Packages
 import pandas as pd
-import numpy as np
 import geopandas as gpd
 # Read the coviddata from a csv into a dataframe
 coviddata = pd.read_csv('../data/raw_2_covid_latest.csv', index_col=0)
@@ -13,11 +16,11 @@ case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', 'Hawaii',"Pue
 case_states.to_csv('basedata.csv')
 case_states.head()
 #Define all states
-allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington", "Alabama", 
-         "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia", "Wisconsin", "Oregon",
-         "Missouri", "Virginia", "Tennessee", "Louisiana", "New York", "Michigan", "Idaho", "Florida",
-         "Illinois", "Montana", "Minnesota", "Indiana","Massachusetts","Kansas","Nevada","Vermont",
-         "Connecticut","New Jersey","District of Columbia","North Carolina","Utah","North Dakota",
+allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
+	 "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia", "Wisconsin",
+	 "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York", "Michigan", "Idaho",
+	 "Florida","Illinois", "Montana", "Minnesota", "Indiana","Massachusetts","Kansas","Nevada",
+	 "Vermont", "Connecticut","New Jersey","District of Columbia","North Carolina","Utah","North Dakota",
          "South Carolina","Mississippi","Colorado","South Dakota","Oklahoma","Wyoming","West Virginia",
          "Maine","New Hampshire","Arizona","Rhode Island"]
 #Define key states
@@ -26,21 +29,17 @@ key=["Arizona", "Florida", "Georgia", "Michigan", "Minnesota", "North Carolina",
 def add_data(startdata,newdatafile,startdatastate, newdatastate, states, newfilename):
     """
     Args:
-        startdata (str):filename with path of starting dataframe that includes geopandas shape
-        information, recommended use basedata.csv from github repo
+        startdata (str):filename with path of starting dataframe that includes geopandas
+	shape information, recommended use basedata.csv from github repo
         newdatafile (str): filename with path to csv of new data to be added
         startdatastate(str): name of state column of starting data
         newdatastate(str): name of state column of new data
-        column (str): column from new data file to be added, only add one at a time, rerun function
-        to add more than one colummn
-        states: states to be considered, built in options allstates=all continguous states,
-        key=key swing states (Arizona, Florida, Georiga, Michigan, Minnesota, North Carolina, Ohio,
-        Pennsylvania, Texas, and Wisconsin), if want another option enter a list of strings
-        of the desired states
-        newfilename(str):name of new data file generated"""
-    import pandas as pd
-    import numpy as np
-    import csv
+        column (str): column from new data file to be added, only add one at a time,
+	rerun function to add more than one colummn
+        states(list): list of strings of the desired states
+        newfilename(str):name of new data file generated
+    Returns:
+	newfilename: the dataframe with the newly added data as a csv"""
     # Read the dataframe to add too
     basedata = pd.read_csv(startdata, index_col=0)
     #Read data being added as a dataframe
