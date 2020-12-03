@@ -58,4 +58,6 @@ def add_data(startdata,newdatafile,startdatastate, newdatastate, states, newfile
     #Merge datasets
     mergeddata=basedata.merge(newdf, left_on=startdatastate, right_on=newdatastate)
     #write out file
-    mergeddata.to_csv(newfilename)
+    result=mergeddata.to_csv(newfilename)
+    #return final dataframe
+    return result
