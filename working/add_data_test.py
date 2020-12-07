@@ -1,3 +1,4 @@
+
 """This module has tests for add_data.py
 class Testadd_data(unittest.TestCase)
 test_oneshot(self)
@@ -8,28 +9,17 @@ import unittest
 import add_data
 #Define all states
 allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
-	"Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia",
-	"Wisconsin", "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York",
-	"Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota", "Indiana",
-	"Massachusetts","Kansas","Nevada","Vermont", "Connecticut","New Jersey",
-	"District of Columbia","North Carolina","Utah","North Dakota",
+        "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia",
+        "Wisconsin", "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York",
+        "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota", "Indiana",
+        "Massachusetts","Kansas","Nevada","Vermont", "Connecticut","New Jersey",
+        "District of Columbia","North Carolina","Utah","North Dakota",
          "South Carolina","Mississippi","Colorado","South Dakota","Oklahoma","Wyoming",
-	"West Virginia", "Maine","New Hampshire","Arizona","Rhode Island"]
+        "West Virginia", "Maine","New Hampshire","Arizona","Rhode Island"]
 #Define key states
 key=["Arizona", "Florida", "Georgia", "Michigan", "Minnesota", "North Carolina", "Ohio",
          "Pennsylvania", "Texas", "Wisconsin"]
 class TestAddData(unittest.TestCase):
-    def test_oneshot(self):
-        """One shot tests
-    Args:
-        self
-    Returns:
-        True: Test passed
-        False: Test failed
-    """
-        self.assertEqual(add_data.add_data('coviddataand2020Election.csv',
-	'../data/raw_7_keystates_covid_voting_issue_poll.csv',
-	'NAME','States', key, "keystates_covid_2020voting_poll.csv"),"keystates_covid_2020voting_poll.csv" )
     def test_smoke(self):
         """Smoke Tests
         Args:
@@ -39,7 +29,18 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         add_data.add_data('basedata.csv','../data/raw_3_2020election.csv',"NAME","States",
-	allstates, "testresults.csv")
+        allstates, "coviddataand2020Election.csv")
+    def test_oneshot(self):
+        """One shot tests
+    Args:
+        self
+    Returns:
+        True: Test passed
+        False: Test failed
+    """
+        self.assertEqual(add_data.add_data('coviddataand2020Election.csv',
+        '../data/raw_7_keystates_covid_voting_issue_poll.csv',
+        'NAME','States', key, "keystates_covid_2020voting_poll.csv"),"keystates_covid_2020voting_poll.csv" )
     def test_edge(self):
         """Edge Tests
         Args:
@@ -50,5 +51,5 @@ class TestAddData(unittest.TestCase):
         """
         with self.assertRaises(TypeError):
             add_data.add_data('basedata.csv','../data/raw_3_2020election.csv',"wrongname",
-	    "States", allstates, "testresults.csv")
+            "States", allstates, "testresults.csv")
 unittest.main()
