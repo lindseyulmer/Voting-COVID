@@ -46,6 +46,8 @@ def add_data(startdata,newdatafile,startdatastate, newdatastate, states, newfile
     newdf=pd.read_csv(newdatafile)
     #Find all non-desired states
     dropstates=[]
+    if (startdatastate not in list(basedata.columns)) or (newdatastate not in list(newdf.columns)):
+        raise ValueError("Wrong State Header Name")
     for eachstate in basedata[startdatastate]:
         if eachstate not in states:
             dropstates.append(eachstate)
@@ -58,6 +60,6 @@ def add_data(startdata,newdatafile,startdatastate, newdatastate, states, newfile
     #Merge datasets
     mergeddata=basedata.merge(newdf, left_on=startdatastate, right_on=newdatastate)
     #write out file
-    result=mergeddata.to_csv(newfilename)
+    mergeddata.to_csv(newfilename)
     #return final dataframe
-    return result
+    return mergeddata.to_csv()
