@@ -59,7 +59,7 @@ df_covid_daily_swing = df_covid_daily[df_covid_daily["state"].isin(swing_states)
 df_covid_daily_swing = pd.merge(left=df_covid_daily_swing, 
                                 right=df_election[["state", "win_2016", "win_2020"]], 
                                 left_on='state', right_on='state')
-print(df_covid_daily_swing.head())
+
 # map 1
 hover_list = [('State','@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
