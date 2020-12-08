@@ -5,7 +5,7 @@ test_smoke(self)
 test_edge(self)
 """
 import unittest
-import add_data
+from CovidElection import add_data
 #Define all states
 allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
         "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia",
@@ -27,8 +27,8 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        add_data.add_data('basedata.csv','../data/raw_3_2020election.csv',"NAME","States",
-        allstates, "coviddataand2020Election.csv")
+        add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"NAME","States",
+        allstates, "data/coviddataand2020Election.csv")
     def test_oneshot(self):
         """One shot tests
     Args:
@@ -37,9 +37,9 @@ class TestAddData(unittest.TestCase):
         True: Test passed
         False: Test failed
     """
-        self.assertEqual(add_data.add_data('coviddataand2020Election.csv',
-        '../data/raw_7_keystates_covid_voting_issue_poll.csv',
-        'NAME','States', key, "keystates_covid_2020voting_poll.csv"),"keystates_covid_2020voting_poll.csv" )
+        self.assertEqual(add_data.add_data('data/coviddataand2020Election.csv',
+        'data/raw_7_keystates_covid_voting_issue_poll.csv',
+        'NAME','States', key, "keystates_covid_2020voting_poll.csv"),"data/keystates_covid_2020voting_poll.csv" )
     def test_edge(self):
         """Edge Tests
         Args:
@@ -49,7 +49,6 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         with self.assertRaises(TypeError):
-            add_data.add_data('basedata.csv','../data/raw_3_2020election.csv',"wrongname",
+            add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
             "States", allstates, "testresults.csv")
 unittest.main()
-
