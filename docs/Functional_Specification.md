@@ -16,7 +16,7 @@ Data on coronavirus cases, election results, and the proportion of mail-in votes
 (Some of this data had to be copied into spreadsheets instead of downloaded as a table because the data was not available in a downloadable format at the time of this project because results were still being finalized.)
 
 ## User Profile
-The user can be anyone who is interested in visualizing covid and election data. This can be anyone from people who work in public policy to just citizens who are interested in the election or covid data. They do not need experience with python but should be comfortable using a Jupyter Notebook to create the figures.
+The user can be anyone who is interested in visualizing covid and election data. This can be anyone from people who work in public policy to just citizens who are interested in the election or covid data. They do not need experience any experience to interact with pre-generated figures but would need some familiarity with python and jupyter notebooks to add new data and create new figures.
 
 ## Use Cases
 ### Use Case 1: User Creating Figure with Data that's preuploaded
