@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import json
-import pandas_bokeh
 from bokeh.io import output_notebook, show, reset_output
 from bokeh.models import (CDSView, ColorBar, ColumnDataSource,
                           CustomJS, CustomJSFilter, Div,
@@ -31,12 +30,14 @@ swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
                 "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
                 "Pennsylvania", "Texas", "Wisconsin"]
 
+#print(current_location)
+
 # Read files
-contiguous_usa = gpd.read_file("../shapefiles/cb_2018_us_state_20m.shp")
-df_covid = pd.read_csv("../data/raw_2_covid_latest.csv")
-df_covid_daily = pd.read_csv("../data/raw_1_covid_daily.csv")
-df_election = pd.read_csv("../data/use_election.csv")
-df_state = pd.read_csv("../data/raw_0_states.csv")
+contiguous_usa = gpd.read_file("./data/shapefiles/cb_2018_us_state_20m.shp")
+df_covid = pd.read_csv("./data/raw_2_covid_latest.csv")
+df_covid_daily = pd.read_csv("./data/raw_1_covid_daily.csv")
+df_election = pd.read_csv("./data/use_election.csv")
+df_state = pd.read_csv("./data/raw_0_states.csv")
 
 # Keep states which are in the shapefile contiguous_usa
 df_covid = df_covid.loc[df_covid["State/Territory"].isin(contiguous_usa["NAME"])]
@@ -158,7 +159,7 @@ html = file_html(Column(Row(plot_1, plot_2),
                         Row(plot_6, plot_7)), 
                  template = template, resources = CDN)
 
-output_file = '../example/plot_swingstate.html'
+output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
     f.write(html)
 view(output_file)

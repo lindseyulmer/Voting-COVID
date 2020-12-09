@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import json
-import pandas_bokeh
 from bokeh.io import output_notebook, show, reset_output
 from bokeh.models import (CDSView, ColorBar, ColumnDataSource,
                           CustomJS, CustomJSFilter, Div,
@@ -24,10 +23,6 @@ from bokeh.models import Div, Paragraph, Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
 from jinja2 import Template
-import os, glob
-current_location = os.getcwd()
-os.chdir(current_location)
-
 
 # define swing states
 swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",

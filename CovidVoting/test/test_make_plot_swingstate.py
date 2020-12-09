@@ -1,13 +1,15 @@
 """the unit test code for the make_plot_swingstate module"""
 # Importing libraries
 import unittest
-from make_plot_swingstate import (make_plot_map, make_plot_scatter,
-                                  make_plot_bar, make_plot_time_series)
+import sys, os
+sys.path.append("..")
+print(os.getcwd())
+from CovidVoting.make_plot_swingstate import (make_plot_map, make_plot_scatter,
+                                            make_plot_bar, make_plot_time_series)
 import pandas as pd
 import numpy as np
 import geopandas as gpd
 import json
-import pandas_bokeh
 from bokeh.io import output_notebook, show, reset_output
 from bokeh.models import (CDSView, ColorBar, ColumnDataSource,
                           CustomJS, CustomJSFilter, Div,
@@ -25,6 +27,40 @@ from bokeh.resources import CDN
 from bokeh.util.browser import view
 from jinja2 import Template
 import os, glob
+
+# define swing states
+swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
+                "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
+                "Pennsylvania", "Texas", "Wisconsin"]
+
+# Read files
+contiguous_usa = gpd.read_file("./data/shapefiles/cb_2018_us_state_20m.shp")
+df_covid = pd.read_csv("./data/raw_2_covid_latest.csv")
+df_covid_daily = pd.read_csv("./data/raw_1_covid_daily.csv")
+df_election = pd.read_csv("./data/use_election.csv")
+df_state = pd.read_csv("./data/raw_0_states.csv")
+
+# Keep states which are in the shapefile contiguous_usa
+df_covid = df_covid.loc[df_covid["State/Territory"].isin(contiguous_usa["NAME"])]
+df_election = df_election.loc[df_election["state"].isin(contiguous_usa["NAME"])]
+
+# process election and covid data
+df_covid_election = pd.merge(left=df_covid, right=df_election, how='right', 
+                             left_on='State/Territory', right_on='state')
+df_covid_election["swing_state_2020"]= np.where(df_covid_election["state"].isin(swing_states), 
+                                                df_covid_election['color_2020'], np.nan)
+df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states), 
+                                                df_covid_election['color_2016'], np.nan)
+# process daily covid data
+df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", "state"]], 
+                             left_on='state_code', right_on='state_code')
+df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'], format='%m/%d/%Y')
+
+# data for swing states
+df_covid_daily_swing = df_covid_daily[df_covid_daily["state"].isin(swing_states)]
+df_covid_daily_swing = pd.merge(left=df_covid_daily_swing, 
+                                right=df_election[["state", "win_2016", "win_2020"]], 
+                                left_on='state', right_on='state')
 
 
 class UnitTestsMakePlotSwing(unittest.TestCase):
@@ -111,39 +147,7 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
 
 if __name__ == '__main__':
 
-    # define swing states
-    swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
-                    "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
-                    "Pennsylvania", "Texas", "Wisconsin"]
 
-    # Read files
-    contiguous_usa = gpd.read_file("../shapefiles/cb_2018_us_state_20m.shp")
-    df_covid = pd.read_csv("../data/raw_2_covid_latest.csv")
-    df_covid_daily = pd.read_csv("../data/raw_1_covid_daily.csv")
-    df_election = pd.read_csv("../data/use_election.csv")
-    df_state = pd.read_csv("../data/raw_0_states.csv")
-
-    # Keep states which are in the shapefile contiguous_usa
-    df_covid = df_covid.loc[df_covid["State/Territory"].isin(contiguous_usa["NAME"])]
-    df_election = df_election.loc[df_election["state"].isin(contiguous_usa["NAME"])]
-
-    # process election and covid data
-    df_covid_election = pd.merge(left=df_covid, right=df_election, how='right', 
-                                 left_on='State/Territory', right_on='state')
-    df_covid_election["swing_state_2020"]= np.where(df_covid_election["state"].isin(swing_states), 
-                                                    df_covid_election['color_2020'], np.nan)
-    df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states), 
-                                                    df_covid_election['color_2016'], np.nan)
-    # process daily covid data
-    df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", "state"]], 
-                                 left_on='state_code', right_on='state_code')
-    df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'], format='%m/%d/%Y')
-
-    # data for swing states
-    df_covid_daily_swing = df_covid_daily[df_covid_daily["state"].isin(swing_states)]
-    df_covid_daily_swing = pd.merge(left=df_covid_daily_swing, 
-                                    right=df_election[["state", "win_2016", "win_2020"]], 
-                                    left_on='state', right_on='state')
 
     unittest.main()
 '''    
