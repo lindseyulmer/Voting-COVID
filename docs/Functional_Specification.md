@@ -11,7 +11,6 @@ Data on coronavirus cases, election results, and the proportion of mail-in votes
 - <a href= 'https://www.fec.gov/documents/1890/federalelections2016.xlsx'>2016 overall election results</a>: 2016 overall election results will be downloaded from the FEC as an excel spreadsheet. 
 - <a href= 'https://www.commonwealthfund.org/publications/2020/sep/election-2020-battleground-state-health-care-poll'>Poll data on covid as a voting issue</a>: Poll data on covid as a voting issue will be downloaded from commonwealthfund.
 - <a href= 'https://www.nbcnews.com/politics/2020-elections/president-results'>2020 results</a>: 2020 results will be copied from nbcnews.com as a CSV.
-- <a href= 'https://www.washingtonpost.com/graphics/2020/elections/early-voting-numbers-so-far/'>2020 results</a>:  2020 early voting data will be copied from the washingtonpost into a CSV.
 - <a href= 'https://www.nytimes.com/interactive/2020/us/elections/early-voting-results.html'>2020 mail-in voting data</a>: 2020 mail-in voting data will be copied from the guardian into a CSV.<br/>
 (Some of this data had to be copied into spreadsheets instead of downloaded as a table because the data was not available in a downloadable format at the time of this project because results were still being finalized.)
 
