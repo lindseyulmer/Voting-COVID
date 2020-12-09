@@ -8,7 +8,7 @@ import geopandas as gpd
 # Read the coviddata from a csv into a dataframe
 coviddata = pd.read_csv('../data/raw_2_covid_latest.csv', index_col=0)
 # Read in shapefile and examine data
-contiguous_usa = gpd.read_file('../shapefiles/cb_2018_us_state_20m.shp')
+contiguous_usa = gpd.read_file('../data/shapefiles/cb_2018_us_state_20m.shp')
 # Merge shapefile with population data
 case_states = contiguous_usa.merge(coviddata, left_on = 'NAME', right_on='State/Territory')
 # Drop Alaska and Hawaii
