@@ -7,9 +7,9 @@ The software components are importing data, structuring data to one dataframe an
 ### `make_plot`: make plots with the preloaded data
 - input: dataset with multiple variables
 - output: plots including bar charts, scatter plots, etc.
-### `add_data`: add additional information to the graphs
-- input: list of integers or strings
-- output: plots including bar charts, scatter plots, etc.
+### `add_data`: prepare data to create figure
+- input: Two data sets as csvs, the new one that's being added on and a datafile containing geopandas shape information
+- output: one combined data set as a csv
 ### `interaction`: increase user interaction in plots
 - input: figures
 - output: figures
