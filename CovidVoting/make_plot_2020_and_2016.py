@@ -4,12 +4,11 @@ interactive plots to show voting and Covid data.
 """
 import json
 import os
+import geopandas as gpd
 import pandas as pd
 from bokeh.models import ColorBar, GeoJSONDataSource, HoverTool, LinearColorMapper
-from bokeh.models.widgets import Tabs
+from bokeh.models.widgets import Panel, Tabs
 from bokeh.plotting import figure
-current_location = os.getcwd()
-os.chdir(current_location)
 
 def make_plot(covid, contiguous_usa, df_election):
     '''
