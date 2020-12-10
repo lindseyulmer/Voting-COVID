@@ -7,10 +7,10 @@ The purpose of this project is to visualize COVID and election data on the same 
 - docs: This directory contains documentation including the functional specification, the design specification, the component specification and the final project presentation.
 - example: This directory includes examples of using the functions in the CovidVoting directory.
 
-Voting-COVID/
-  |- README.md
-  |- CovidVoting/
-     |- __init__.py/
+-Voting-COVID/
+  -|- README.md
+  -|- CovidVoting/
+     -|- __init__.py/
      |- main.py/
      |- add_data.py/
      |- make_plot_2020_and_2016.py/
