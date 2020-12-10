@@ -1,0 +1,68 @@
+.
+├── CovidVoting
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-37.pyc
+│   │   ├── make_plot_swingstate.cpython-37.pyc
+│   │   └── test_make_plot_swingstate.cpython-37.pyc
+│   ├── add_data.py
+│   ├── main.py
+│   ├── make_plot_2020_and_2016.py
+│   ├── make_plot_swingstate.py
+│   └── test
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-37.pyc
+│       │   └── test_make_plot_swingstate.cpython-37.pyc
+│       ├── test_add_data.py
+│       ├── test_add_data_V2.py
+│       ├── test_make_plot_2020_and_2016.py
+│       └── test_make_plot_swingstate.py
+├── LICENSE
+├── README.md
+├── __init__.py
+├── data
+│   ├── __init__.py
+│   ├── basedata.csv
+│   ├── coviddataand2020Election.csv
+│   ├── data_formatting.ipynb
+│   ├── keystates_covid_2020voting_poll.csv
+│   ├── raw_0_states.csv
+│   ├── raw_1_covid_daily.csv
+│   ├── raw_2_covid_latest.csv
+│   ├── raw_3_2020election.csv
+│   ├── raw_5_2016election.csv
+│   ├── raw_6_1_2016mail.csv
+│   ├── raw_6_2016mail.csv
+│   ├── raw_7_keystates_covid_voting_issue_poll.csv
+│   ├── raw_8_2020_votebymail.csv
+│   ├── shapefiles
+│   │   ├── __init__.py
+│   │   ├── cb_2018_us_nation_20m.cpg
+│   │   ├── cb_2018_us_nation_20m.dbf
+│   │   ├── cb_2018_us_nation_20m.prj
+│   │   ├── cb_2018_us_nation_20m.shp
+│   │   ├── cb_2018_us_nation_20m.shp.ea.iso.xml
+│   │   ├── cb_2018_us_nation_20m.shp.iso.xml
+│   │   ├── cb_2018_us_nation_20m.shx
+│   │   ├── cb_2018_us_state_20m.cpg
+│   │   ├── cb_2018_us_state_20m.dbf
+│   │   ├── cb_2018_us_state_20m.prj
+│   │   ├── cb_2018_us_state_20m.shp
+│   │   ├── cb_2018_us_state_20m.shp.ea.iso.xml
+│   │   ├── cb_2018_us_state_20m.shp.iso.xml
+│   │   └── cb_2018_us_state_20m.shx
+│   └── use_election.csv
+├── docs
+│   ├── Component_Specification.md
+│   ├── Design.md
+│   ├── Functional_Specification.md
+│   ├── TechnologyReview.pdf
+│   └── __init__.py
+├── environment.yml
+├── example
+│   ├── demo_swingstate.gif
+│   └── plot_swingstate.html
+└── tree.txt
+
+8 directories, 57 files
