@@ -35,12 +35,7 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-    # add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"NAME","States",
-    # allstates, "coviddataand2020Election.csv")
         add_data('data/coviddataand2020Election.csv', 'data/raw_7_keystates_covid_voting_issue_poll.csv', 'NAME','States', key, "keystates_covid_2020voting_poll.csv")
-    def setUp(self):
-        self.df = pd.read_csv('keystates_covid_2020voting_poll.csv',index_col=0)
-        self.df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv',index_col=0)
     def test_oneshot(self):
         """One shot tests
         Args:
@@ -49,8 +44,10 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        self.assertValid(
-        self.df2.columns ,self.df.columns)
+        df = pd.read_csv('keystates_covid_2020voting_poll.csv',index_col=0)
+        df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv',index_col=0)
+        self.assertEqual(
+        df.columns.all(), df2.columns.all())
     def test_edge(self):
         """Edge Tests
         Args:
