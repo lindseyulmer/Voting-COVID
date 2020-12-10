@@ -34,20 +34,12 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-    # add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"NAME","States",
-    # allstates, "coviddataand2020Election.csv")
         add_data('data/coviddataand2020Election.csv', 'data/raw_7_keystates_covid_voting_issue_poll.csv', 'NAME','States', key, "keystates_covid_2020voting_poll.csv")
     def setUpModule():
         global df
         with dt.working_directory(__file__):
             df = pd.read_csv('keystates_covid_2020voting_poll.csv')
             df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv')
-    """
-    def df():
-        return pd.read_csv('keystates_covid_2020voting_poll.csv')
-    def df2():
-        return pd.read_csv('data/keystates_covid_2020voting_poll.csv')
-    """
     def test_oneshot(self):
         """One shot tests
         Args:
@@ -56,12 +48,7 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        self.assertEqual(df.columns,df2.columns)
-        """
-        self.assertEqual(add_data.add_data('data/coviddataand2020Election.csv',
-        'data/raw_7_keystates_covid_voting_issue_poll.csv',
-        'NAME','States', key, "keystates_covid_2020voting_poll.csv"),"data/keystates_covid_2020voting_poll.csv" )
-        """
+        self.assertEqual(self.df.columns,self.df2.columns)
     def test_edge(self):
         """Edge Tests
         Args:
@@ -71,7 +58,7 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         with self.assertRaises(TypeError):
-            add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
+            add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
             "States", allstates, "testresults.csv")
 if __name__ == '__main__':
 
