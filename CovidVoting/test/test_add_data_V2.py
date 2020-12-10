@@ -9,6 +9,7 @@ sys.path.append("..")
 print(os.getcwd())
 from pandas._testing import assert_frame_equal
 from CovidVoting.add_data import (add_data)
+import pandas as pd
 import datatest as dt
 #Define all states
 allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
@@ -34,12 +35,12 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
+    # add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"NAME","States",
+    # allstates, "coviddataand2020Election.csv")
         add_data('data/coviddataand2020Election.csv', 'data/raw_7_keystates_covid_voting_issue_poll.csv', 'NAME','States', key, "keystates_covid_2020voting_poll.csv")
-    def setUpModule():
-        global df
-        with dt.working_directory(__file__):
-            df = pd.read_csv('keystates_covid_2020voting_poll.csv')
-            df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv')
+    def setUp(self):
+        self.df = pd.read_csv('keystates_covid_2020voting_poll.csv')
+        self.df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv')
     def test_oneshot(self):
         """One shot tests
         Args:
@@ -48,7 +49,15 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        self.assertEqual(self.df.columns,self.df2.columns)
+        self.assertTrue(self.df.columns,
+        {"STATEFP", "STATENS",	"AFFGEOID", "GEOID", "STUSP", "NAME", "LSAD",	"ALAND","
+         "AWATER", "geometry", "Total Cases", "Confirmed Cases", "Probable Cases", "Cases in Last 7 Days",
+         "Case Rate per 100000", "Total Deaths", "Confirmed Deaths", "Probable Deaths", "Deaths in Last 7 Days",
+          "Death Rate per 100000", "Case Rate per 100000 in Last 7 Days","Death Rate per 100K in Last 7 Days",
+          "States_x", "BIDEN_percent", "BIDEN_votes", "TRUMP_percent", "TRUMP_votes", "States_y",
+          "Ability to address public health needs and economic costs of COVID-19",
+          "Likelihood to protect health insurance coverage for people with preexisting conditions",
+          "Likelihood to lower the cost of your health care")
     def test_edge(self):
         """Edge Tests
         Args:
@@ -58,10 +67,9 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         with self.assertRaises(TypeError):
-            add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
+            add_data.add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
             "States", allstates, "testresults.csv")
 if __name__ == '__main__':
 
 
     unittest.main()
-
