@@ -58,7 +58,7 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        with self.assertRaises(TypeError):
+        with self.assertRaises(KeyError):
             add_data('data/basedata.csv','data/raw_3_2020election.csv',"wrongname",
             "States", allstates, "testresults.csv")
 if __name__ == '__main__':
