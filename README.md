@@ -6,7 +6,7 @@ The purpose of this project is to visualize COVID and election data on the same 
 - data: This directory contains data downloaded from multiple sources, including election results data from 2016 and 2020, Covid related data, and shapefile data that stores the geometric information of the United States.
 - docs: This directory contains documentation including the functional specification, the design specification, the component specification and the final project presentation.
 - example: This directory includes examples of using the functions in the CovidVoting directory.
-The project has the following structure:
+
 + Voting-COVID/
   |- README.md
   |- CovidVoting/
