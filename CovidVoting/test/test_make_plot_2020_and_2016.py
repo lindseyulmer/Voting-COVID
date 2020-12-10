@@ -17,9 +17,9 @@ from CovidVoting.make_plot_2020_and_2016 import make_plot
 
 current_location = os.getcwd()
 os.chdir(current_location)
-contiguous_usa = gpd.read_file("../../data/shapefiles/cb_2018_us_state_20m.shp")
-covid = pd.read_csv("../../data/raw_2_covid_latest.csv")
-df_election = pd.read_csv("../../data/use_election.csv")
+contiguous_usa = gpd.read_file("/data/shapefiles/cb_2018_us_state_20m.shp")
+covid = pd.read_csv("/data/raw_2_covid_latest.csv")
+df_election = pd.read_csv("/data/use_election.csv")
 
 class UnitTests(unittest.TestCase):
     """
