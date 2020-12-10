@@ -131,12 +131,11 @@ The purpose of this project is to use our module to visualize COVID and election
 Clone the github repo so that you have all necessary functions.
 Prepare the data you will be adding as a csv.
 #### Step 2: Add Data
-Use the add_data function from add_data.py to add your desired data. It is recommended to use basedata.csv from the data directory as the starting directory so that you are adding your data onto to a csv that already contains the necessary geopandas information. The basedata.csv contains geopandas and cdc covid case data.
+Use the add_data function from `add_data.py` to add your desired data. It is recommended to use basedata.csv from the data directory as the starting directory so that you are adding your data onto to a csv that already contains the necessary geopandas information. The basedata.csv contains geopandas and cdc covid case data.
 #### Step 3-1: Make Maps for all states
 
 #### Step 3-2: Make Plots for the swing states
 ![](example/demo_swingstate.gif)
-We can use functions in `make_plot_swings.py` to build map to view the election results in the map.
-Also we can make scatter plots to show two variables relationship in the swing states. We also provide the making bar chart function to compared one variable for the key states in 2016 and 2020 election. We can view more details when we move our cursor to the certain rectangles. Last, our time series function can help youwe show one attribute in the time series plot for states where each party won in the election.
+We can use functions in `make_plot_swings.py` to build a map to view the election results in the map. Also, we can make scatter plots to show two variables' relationships in the swing states. We also provide the making bar chart function to compared one variable for the key states in the 2016 and 2020 elections. We can view more details when we move our cursor to specific rectangles. Last, our time series function can help you show one attribute in the time series plot for states where each party won in the election.
 #### Example of using our module
 We have the example codes of using our module in `main.py`. You can find the results in the directory `example`.
