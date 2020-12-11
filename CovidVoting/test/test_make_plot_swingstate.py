@@ -9,16 +9,13 @@ from CovidVoting.make_plot_swingstate import (make_plot_map, make_plot_scatter,
 import pandas as pd
 import numpy as np
 import geopandas as gpd
-import json
-from bokeh.io import output_notebook, show, reset_output
-from bokeh.models import (CDSView, ColorBar, ColumnDataSource,
+from bokeh.io import reset_output
+from bokeh.models import (CDSView, ColumnDataSource,
                           CustomJS, CustomJSFilter, Div,
-                          GeoJSONDataSource, HoverTool,
                           LinearColorMapper, Slider,
                           LogColorMapper, Legend, Title)
 from bokeh.layouts import column, row, widgetbox
 from bokeh.palettes import brewer
-from bokeh.plotting import figure
 from bokeh.transform import dodge, factor_cmap
 from bokeh.plotting import figure
 from bokeh.embed import file_html
@@ -26,7 +23,8 @@ from bokeh.models import Div, Paragraph, Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
 from jinja2 import Template
-import os, glob
+import os
+import glob
 
 # define swing states
 swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
