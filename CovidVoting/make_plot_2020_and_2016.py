@@ -2,9 +2,6 @@
 In this module, the function make_plot uses the package Bokeh to help creating
 interactive plots to show voting and Covid data. 
 """
-import json
-import os
-import geopandas as gpd
 import pandas as pd
 from bokeh.models import ColorBar, GeoJSONDataSource, HoverTool, LinearColorMapper
 from bokeh.models.widgets import Panel, Tabs
@@ -33,7 +30,7 @@ def make_plot(covid, contiguous_usa, df_election):
     map_info = map_info.loc[~map_info['NAME'].isin(['Alaska', 'Hawaii'])]
     # Input GeoJSON source that contains features for plotting
     geosource = GeoJSONDataSource(geojson = map_info.to_json())
-    base_colors = ["#cb181d","#fb6a4a","#fcae91","#fee5d9","#eff3ff","#bdd7e7","#6baed6","#2171b5"]
+    base_colors = ["#cb181d", "#fb6a4a", "#fcae91", "#fee5d9", "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
     # Instantiate LinearColorMapper that linearly maps numbers in a range, into a sequence of colors.
     color_mapper_2020 = LinearColorMapper(palette = base_colors,
                                      low = df_election["color_2020"].min(),
@@ -93,20 +90,20 @@ def make_plot(covid, contiguous_usa, df_election):
                            fill_alpha = 1)
     # Create hover tool
     p2020.add_tools(HoverTool(renderers = [states_2020],
-                          tooltips = [('State','@NAME'),
-                                      ('Case Rate per 100000','@{Case Rate per 100000}'),
-                                      ('Confirmed cases','@{Total Cases}'),
-                                      ('Total deaths','@{Total Deaths}')]))
+                          tooltips = [('State', '@NAME'),
+                                      ('Case Rate per 100000', '@{Case Rate per 100000}'),
+                                      ('Confirmed cases', '@{Total Cases}'),
+                                      ('Total deaths', '@{Total Deaths}')]))
     p2016.add_tools(HoverTool(renderers = [states_2016],
-                          tooltips = [('State','@NAME'),
-                                      ('Case Rate per 100000','@{Case Rate per 100000}'),
-                                      ('Confirmed cases','@{Total Cases}'),
-                                      ('Total deaths','@{Total Deaths}')]))
+                          tooltips = [('State', '@NAME'),
+                                      ('Case Rate per 100000', '@{Case Rate per 100000}'),
+                                      ('Confirmed cases', '@{Total Cases}'),
+                                      ('Total deaths', '@{Total Deaths}')]))
     # Specify layout
     p2020.add_layout(color_bar_2020, 'below')
     p2016.add_layout(color_bar_2016, 'below')
-    panel_2020 = Panel(child = p2020, title = 'COVID-19 cases & 2020 election')
-    panel_2016 = Panel(child = p2016, title = 'COVID-19 cases & 2016 election')
+    panel_2020 = Panel(child=p2020, title='COVID-19 cases & 2020 election')
+    panel_2016 = Panel(child=p2016, title='COVID-19 cases & 2016 election')
     plots = Tabs(tabs=[panel_2020, panel_2016])
     return plots
 
