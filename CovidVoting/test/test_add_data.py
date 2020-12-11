@@ -37,7 +37,7 @@ class TestAddData(unittest.TestCase):
         """
         add_data('data/coviddataand2020Election.csv',
         'data/raw_7_keystates_covid_voting_issue_poll.csv',
-        'NAME','States', key, "keystates_covid_2020voting_poll.csv")
+        'NAME','States', key, "CovidVoting/test/keystates_covid_2020voting_poll.csv")
     def test_oneshot(self):
         """One shot tests
         Args:
@@ -46,7 +46,7 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        df = pd.read_csv('keystates_covid_2020voting_poll.csv',index_col=0)
+        df = pd.read_csv("CovidVoting/test/keystates_covid_2020voting_poll.csv",index_col=0)
         df2=pd.read_csv('data/keystates_covid_2020voting_poll.csv',index_col=0)
         self.assertEqual(
         df.columns.all(), df2.columns.all())
