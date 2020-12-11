@@ -8,23 +8,24 @@ import pandas as pd
 import geopandas as gpd
 # Read the coviddata from a csv into a dataframe
 coviddata = pd.read_csv('data/raw_2_covid_latest.csv',
-           index_col=0)
+                        index_col=0)
 # Read in shapefile and examine data
 contiguous_usa = gpd.read_file('data/shapefiles/cb_2018_us_state_20m.shp')
 # Merge shapefile with population data
 case_states = contiguous_usa.merge(coviddata, left_on='NAME',
-           right_on='State/Territory')
+                                   right_on='State/Territory')
 # Drop Alaska and Hawaii
-case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', 'Hawaii",
-                                  "Puerto Rico"])]
+case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', "Hawaii",
+                                                         "Puerto Rico"])]
 case_states.to_csv('basedata.csv')
 case_states.head()
 # Define all states
-allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
+allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
            "Washington", "Alabama", "Arkansas", "New Mexico", "Texas",
            "California", "Kentucky", "Georgia", "Wisconsin",
-           "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York",
-           "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota",
+           "Oregon", "Missouri", "Virginia", "Tennessee",
+           "Louisiana", "New York", "Michigan", "Idaho",
+           "Florida", "Illinois", "Montana", "Minnesota",
            "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
            "Connecticut", "New Jersey", "District of Columbia",
            "North Carolina", "Utah", "North Dakota", "South Carolina",
@@ -35,7 +36,7 @@ key=["Arizona", "Florida", "Georgia", "Michigan",
      "Minnesota", "North Carolina", "Ohio",
      "Pennsylvania", "Texas", "Wisconsin"]
 def add_data(startdata,newdatafile,startdatastate, newdatastate,
-           states, newfilename):
+              states, newfilename):
     """
     Args:
         startdata (str):filename with path of starting dataframe that
