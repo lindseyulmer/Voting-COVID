@@ -2,13 +2,13 @@
 # Importing libraries
 import unittest
 import sys, os
-sys.path.append("..")
-print(os.getcwd())
-from CovidVoting.make_plot_swingstate import (make_plot_map, make_plot_scatter,
-                                            make_plot_bar, make_plot_time_series)
+import os
+import glob
 import pandas as pd
 import numpy as np
 import geopandas as gpd
+from CovidVoting.make_plot_swingstate import (make_plot_map, make_plot_scatter,
+                                            make_plot_bar, make_plot_time_series)
 from bokeh.io import reset_output
 from bokeh.models import (CDSView, ColumnDataSource,
                           CustomJS, CustomJSFilter, Div,
@@ -23,8 +23,9 @@ from bokeh.models import Div, Paragraph, Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
 from jinja2 import Template
-import os
-import glob
+sys.path.append("..")
+print(os.getcwd())
+
 
 # define swing states
 swing_states = ["Arizona", "Colorado", "Florida",
@@ -41,25 +42,34 @@ df_election = pd.read_csv("./data/use_election.csv")
 df_state = pd.read_csv("./data/raw_0_states.csv")
 
 # Keep states which are in the shapefile contiguous_usa
-df_covid = df_covid.loc[df_covid["State/Territory"].isin(contiguous_usa["NAME"])]
-df_election = df_election.loc[df_election["state"].isin(contiguous_usa["NAME"])]
+df_covid = df_covid.loc[df_covid[
+  "State/Territory"].isin(contiguous_usa["NAME"])]
+df_election = df_election.loc[
+  df_election["state"].isin(contiguous_usa["NAME"])]
 
 # process election and covid data
-df_covid_election = pd.merge(left=df_covid, right=df_election, how='right', 
+df_covid_election = pd.merge(left=df_covid, right=df_election, how='right',
                              left_on='State/Territory', right_on='state')
-df_covid_election["swing_state_2020"]= np.where(df_covid_election["state"].isin(swing_states), 
-                                                df_covid_election['color_2020'], np.nan)
-df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states), 
-                                                df_covid_election['color_2016'], np.nan)
+df_covid_election["swing_state_2020"]= np.where(
+  df_covid_election["state"].isin(swing_states),
+  df_covid_election['color_2020'], np.nan)
+df_covid_election["swing_state_2016"] = np.where(
+  df_covid_election["state"].isin(swing_states), 
+  df_covid_election['color_2016'],
+  np.nan)
 # process daily covid data
-df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", "state"]], 
-                             left_on='state_code', right_on='state_code')
-df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'], format='%m/%d/%Y')
+df_covid_daily = pd.merge(left=df_covid_daily,
+                          right=df_state[["state_code", "state"]],
+                          left_on='state_code', right_on='state_code')
+df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'],
+                                        format='%m/%d/%Y')
 
 # data for swing states
-df_covid_daily_swing = df_covid_daily[df_covid_daily["state"].isin(swing_states)]
-df_covid_daily_swing = pd.merge(left=df_covid_daily_swing, 
-                                right=df_election[["state", "win_2016", "win_2020"]], 
+df_covid_daily_swing = df_covid_daily[
+  df_covid_daily["state"].isin(swing_states)]
+df_covid_daily_swing = pd.merge(left=df_covid_daily_swing,
+                                right=df_election[["state",
+                                                   "win_2016", "win_2020"]],
                                 left_on='state', right_on='state')
 
 
@@ -68,61 +78,70 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
 
 
     def test_make_map(self):
-        hover_list = [('State','@NAME')]
-        p = make_plot_map(df_covid_election, contiguous_usa, 'swing_state_2020',
-                          'color_2020', hover_list, 
+        hover_list = [('State', '@NAME')]
+        p = make_plot_map(df_covid_election,
+                          contiguous_usa, 'swing_state_2020',
+                          'color_2020', hover_list,
                           '2020 Election Result of Swing States')
-        self.assertEqual(str(type(p)),"<class 'bokeh.plotting.figure.Figure'>")
+        self.assertEqual(str(type(p)), "<class 'bokeh.plotting.figure.Figure'>")
 
     def test_make_scatter(self):
         category_list = ['Democratic', 'Republican']
-        source_df = df_covid_election[df_covid_election['state'].isin(swing_states)]
-        x_col='Total Cases'
-        y_col='Total Deaths'
+        source_df = df_covid_election[
+          df_covid_election['state'].isin(swing_states)]
+        x_col = 'Total Cases'
+        y_col = 'Total Deaths'
         hover_list = [('State', '@state'),
                       ('Total Cases', '@{Total Cases}'),
                       ('Total Deaths', '@{Total Deaths}')]
         color_col = 'win_2020'
-        color_palette = ["#5DADE2","#EC7063"]
+        color_palette = ["#5DADE2", "#EC7063"]
         title = 'Total cases and total deaths in swing states'
         subtitle = "colors from 2020 election results"
         x_label = 'the number of total cases'
         y_label = 'the number of total deaths'
-        p = make_plot_scatter(source_df, category_list, color_col, color_palette,
-                              x_col, y_col, hover_list, x_label, y_label, title, subtitle)
-        self.assertEqual(str(type(p)),"<class 'bokeh.plotting.figure.Figure'>")
-    
+        p = make_plot_scatter(source_df, category_list,
+                              color_col, color_palette,
+                              x_col, y_col, hover_list, x_label,
+                              y_label, title, subtitle)
+        self.assertEqual(str(type(p)), "<class 'bokeh.plotting.figure.Figure'>")
+
     def test_make_bar(self):
-        source_df = df_covid_election[["state", "percent_turnout_mail_2016", "percent_turnout_mail_2020", "Total Cases", "Total Deaths", 'win_2020', 'win_2016']][df_covid_election["swing_state_2020"].notnull()]
+        source_df = df_covid_election[["state", "percent_turnout_mail_2016",
+                                       "percent_turnout_mail_2020", "Total Cases",
+                                       "Total Deaths", 'win_2020', 'win_2016']]
+        [df_covid_election["swing_state_2020"].notnull()]
         x_axis_list = swing_states
         title = "the percentage of turnout by mail in 2016 and 2020 election"
         y1 = "percent_turnout_mail_2016"
         y2 = "percent_turnout_mail_2020"
         y1_label = "2016"
         y2_label = "2020"
-        hover_list=[("win","@$name"), 
+        hover_list = [("win", "@$name"),
                     ('Total Cases', '@{Total Cases}'),
                     ('Total Deaths', '@{Total Deaths}')]
-        p = make_plot_bar(source_df, x_axis_list, title, y1, y2, y1_label, y2_label, hover_list)
-        self.assertEqual(str(type(p)),"<class 'bokeh.plotting.figure.Figure'>")
+        p = make_plot_bar(source_df, x_axis_list,
+                          title, y1, y2, y1_label, y2_label, hover_list)
+        self.assertEqual(str(type(p)), "<class 'bokeh.plotting.figure.Figure'>")
 
     def test_make_line(self):
         source_df = df_covid_daily_swing
         group_col = 'win_2020'
         use_col = 'tot_cases'
         y_label = 'total cases (thousands)'
-        title =
-        'total cumulative cases for states where each party won in 2020'
+        title ='total cumulative cases for states each party won in 2020'
         hover_list = [('Date', '@date{%F}'),
                       ('Total Cases (thousands)', '@{tot_cases}{int}')]
-        p = make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
-        self.assertEqual(str(type(p)),"<class 'bokeh.plotting.figure.Figure'>")
-
+        p = make_plot_time_series(source_df, group_col,
+                                  use_col, y_label, title, hover_list)
+        self.assertEqual(str(type(p)), "<class 'bokeh.plotting.figure.Figure'>")
+        
+        
 '''
     def test_html(self):
-        
-    
-    
+  
+
+
     def test_smoke(self):
         """smoke test"""
         n_neighbors = 3
@@ -151,7 +170,7 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-'''    
+''' 
     suite = unittest.TestLoader().loadTestsFromTestCase(UnitTestsMakePlot)
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
