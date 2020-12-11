@@ -20,13 +20,16 @@ key = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
        "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
 #Define all states
-allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
-           "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia", "Wisconsin",
-           "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York", 
-           "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota",
-           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont", "Connecticut",
-           "New Jersey", "District of Columbia", "North Carolina", "Utah", "North Dakota",
-           "South Carolina", "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
+allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
+           "Washington", "Alabama", "Arkansas", "New Mexico", "Texas",
+           "California", "Kentucky", "Georgia", "Wisconsin",
+           "Oregon", "Missouri", "Virginia", "Tennessee",
+           "Louisiana", "New York", "Michigan", "Idaho",
+           "Florida", "Illinois", "Montana", "Minnesota",
+           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+           "Connecticut", "New Jersey", "District of Columbia",
+           "North Carolina", "Utah", "North Dakota", "South Carolina",
+           "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
            "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
 
 # print(current_location)
@@ -73,8 +76,8 @@ df_covid_daily_swing = pd.read_csv("data/covid_daily_swing.csv")
 # map 1
 hover_list = [('State', '@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
-                           'swing_state_2020', 'color_2020', hover_list,
-                           '2020 Election Result of Swing States')
+                       'swing_state_2020', 'color_2020', hover_list,
+                       '2020 Election Result of Swing States')
 # map 2
 hover_list = [('State', '@NAME')]
 plot_2 = make_plot_map(df_covid_election, contiguous_usa,
@@ -133,16 +136,16 @@ y_label = 'total cases (thousands)'
 title = 'total cumulative cases for states where each party won in 2020'
 hover_list = [('Date', '@date{%F}'), 
               ('Total Cases (thousands)', '@{tot_cases}{int}')]
-plot_6=make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
+plot_6 = make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
 # daily 2
-source_df=df_covid_daily_swing
-group_col='win_2016'
-use_col='tot_cases'
-y_label='total cases (thousands)'
-title='total cumulative cases for states where each party won in 2016'
-hover_list=[('Date', '@date{%F}'), 
+source_df = df_covid_daily_swing
+group_col = 'win_2016'
+use_col = 'tot_cases'
+y_label = 'total cases (thousands)'
+title = 'total cumulative cases for states where each party won in 2016'
+hover_list = [('Date', '@date{%F}'), 
               ('Total Cases (thousands)', '@{tot_cases}{int}')]
-plot_7=make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
+plot_7 = make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
 
 # show in the html file
 template = Template(
