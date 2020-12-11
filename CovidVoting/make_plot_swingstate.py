@@ -4,15 +4,12 @@ module_text
 
 # Importing libraries
 from bokeh.models import (ColorBar, ColumnDataSource,
-                          Div,
                           GeoJSONDataSource, HoverTool,
                           LinearColorMapper,
                           Title)
 from bokeh.plotting import figure
 from bokeh.transform import dodge, factor_cmap
 from bokeh.plotting import figure
-from bokeh.util.browser import view
-from jinja2 import Template
 
 # define swing states
 swing_states = ["Arizona", "Florida", "Georgia", "Michigan",
@@ -42,7 +39,8 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
 
     base_colors = ["#cb181d", "#fb6a4a", "#fcae91", "#fee5d9",
                    "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
-    # Instantiate LinearColorMapper that linearly maps numbers in a range, into a sequence of colors.
+    """Instantiate LinearColorMapper that linearly maps numbers in a range,
+    into a sequence of colors."""
     color_mapper = LinearColorMapper(palette=base_colors,
                                      low=source_df[range_col].min(),
                                      high=source_df[range_col].max())
@@ -55,32 +53,29 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
                    '2': '',
                    '4': '',
                    '6': '',
-                   '8':'Biden wins'}
+                   '8': 'Biden wins'}
 
     # Create color bar.
     color_bar = ColorBar(color_mapper=color_mapper,
                          label_standoff=5,
                          width=200, height=10,
                          border_line_color=None,
-                         location=(0,0),
+                         location=(0, 0),
                          orientation='horizontal',
                          major_label_overrides=tick_labels)
 
     # Create figure object
-    p = figure(title=title, 
+    p = figure(title=title,
                plot_height=400,
                plot_width=600,
-               toolbar_location=None
-               # toolbar_location='below',
-               # tools="pan, wheel_zoom, box_zoom, reset"
-              )
+               toolbar_location=None)
     p.xgrid.grid_line_color = None
     p.ygrid.grid_line_color = None
 
     # Add patch renderer to figure
-    states = p.patches('xs','ys', source=geosource,
-                               fill_color={'field' :field,
-                                           'transform' : color_mapper},
+    states = p.patches('xs', 'ys', source=geosource,
+                       fill_color={'field': field,
+                                   'transform': color_mapper},
                        line_color="gray",
                        line_width=0.25,
                        fill_alpha=1)
@@ -107,7 +102,7 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     function: make a scatter plot to show the relationship
     among COVID-19 positive cases,
     deaths and election results in the swing states
-        
+ 
     source_df: (dataframe)
     category_list: (list)
     color_col, x_col, y_col:
@@ -201,7 +196,7 @@ def make_plot_time_series(source_df, group_col, use_col,
     function: make a time series chart to show the total cumulative
               cases for states where each party won in the election
     source_df: (df)
-    group_col: (string) group by date and what 
+    group_col: (string) group by date and what
     use_col: (string) the variables to show in the plot
     y_label: (string)
     title: (string)the title of the bar chart
