@@ -16,21 +16,24 @@ current_location = os.getcwd()
 os.chdir(current_location)
 
 # define swing states
-key = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
-       "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
+# Define all states
+allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
+             "Pennsylvania", "Nebraska", "Washington",
+             "Alabama", "Arkansas", "New Mexico", "Texas",
+             "California", "Kentucky", "Georgia", "Wisconsin",
+             "Oregon", "Missouri", "Virginia", "Tennessee",
+             "Louisiana", "New York", "Michigan", "Idaho",
+             "Florida", "Illinois", "Montana", "Minnesota",
+             "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+             "Connecticut", "New Jersey", "District of Columbia",
+             "North Carolina", "Utah", "North Dakota", "South Carolina",
+             "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
+             "West Virginia", "Maine", "New Hampshire", "Arizona",
+             "Rhode Island"]
+# Define key states
+key = ["Arizona", "Florida", "Georgia", "Michigan", 
+       "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
-#Define all states
-allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
-           "Washington", "Alabama", "Arkansas", "New Mexico", "Texas",
-           "California", "Kentucky", "Georgia", "Wisconsin",
-           "Oregon", "Missouri", "Virginia", "Tennessee",
-           "Louisiana", "New York", "Michigan", "Idaho",
-           "Florida", "Illinois", "Montana", "Minnesota",
-           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-           "Connecticut", "New Jersey", "District of Columbia",
-           "North Carolina", "Utah", "North Dakota", "South Carolina",
-           "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
-           "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
 
 # print(current_location)
 
@@ -51,26 +54,28 @@ df_election = df_election.loc[df_election["state"].isin(contiguous_usa["NAME"])]
 df_covid_election = pd.merge(left=df_covid, right=df_election, how='right', 
                              left_on='State/Territory', right_on='state')
 df_covid_election["swing_state_2020"]= np.where(df_covid_election["state"].isin(swing_states), 
-						df_covid_election['color_2020'], np.nan)
-df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states), 
-						df_covid_election['color_2016'], np.nan)
+                                                df_covid_election['color_2020'], np.nan)
+df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states),
+                                                df_covid_election['color_2016'], np.nan)
 # process daily covid data
 df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", 
            "state"]], left_on='state_code', right_on='state_code')
-df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'], format='%m/%d/%Y')
+df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'],
+                                        format='%m/%d/%Y')
 
 # data for swing states
-df_covid_daily_swing = df_covid_daily[df_covid_daily["state"].isin(swing_states)]
-df_covid_daily_swing = pd.merge(left=df_covid_daily_swing, 
-                                right=df_election[["state", "win_2016", "win_2020"]], 
+df_covid_daily_swing = df_covid_daily[
+                                      df_covid_daily["state"].isin(swing_states)]
+df_covid_daily_swing = pd.merge(left=df_covid_daily_swing,
+                                right=df_election[["state", "win_2016", "win_2020"]],
                                 left_on='state', right_on='state')
 print(df_covid_daily_swing.head())
 """
 # use add_data to create covid_election.csv
 add_data('data/basedata.csv', "data/use_election.csv", 'NAME', "state", allstates, "data/covid_election.csv")
 # use add_data to create covid_daily_swing.csv
-add_data('data/basedata.csv',"data/raw_1_covid_daily.csv", "NAME", "state_code", key, "data/covid_daily_swing.csv")
-#read add_data results as a csv
+add_data('data/basedata.csv', "data/raw_1_covid_daily.csv", "NAME", "state_code", key, "data/covid_daily_swing.csv")
+# read add_data results as a csv
 df_covid_election = pd.read_csv("data/covid_election.csv")
 df_covid_daily_swing = pd.read_csv("data/covid_daily_swing.csv")
 # map 1
@@ -81,13 +86,13 @@ plot_1 = make_plot_map(df_covid_election, contiguous_usa,
 # map 2
 hover_list = [('State', '@NAME')]
 plot_2 = make_plot_map(df_covid_election, contiguous_usa,
-                           'swing_state_2016', 'color_2016', hover_list,
-                           '2016 Election Result of Swing States')
+                       'swing_state_2016', 'color_2016', hover_list,
+                        '2016 Election Result of Swing States')
 # scatter plot 1
 category_list = ['Democratic', 'Republican']
-source_df = df_covid_election[df_covid_election['state'].isin(swing_states)]
-x_col='Total Cases'
-y_col='Total Deaths'
+source_df = df_covid_election[df_covid_election['state'].isin(key)]
+x_col = 'Total Cases'
+y_col = 'Total Deaths'
 hover_list = [('State', '@state'),
               ('Total Cases', '@{Total Cases}'),
               ('Total Deaths', '@{Total Deaths}')]
@@ -101,12 +106,12 @@ plot_3 = make_plot_scatter(source_df, category_list, color_col, color_palette,
                            x_col, y_col, hover_list, x_label, y_label, title, subtitle)
 # scatter plot 2
 category_list = ['Democratic', 'Republican']
-source_df = df_covid_election[df_covid_election['state'].isin(swing_states)]
+source_df = df_covid_election[df_covid_election['state'].isin(key)]
 x_col = 'Total Cases'
 y_col = 'Total Deaths'
 hover_list = [('State', '@state'),
-	    ('Total Cases', '@{Total Cases}'),
-	    ('Total Deaths', '@{Total Deaths}')]
+              ('Total Cases', '@{Total Cases}'),
+              ('Total Deaths', '@{Total Deaths}')]
 color_col = 'win_2016'
 color_palette = ["#5DADE2", "#EC7063"]
 title = 'Total cases and total deaths in swing states'
@@ -118,7 +123,7 @@ plot_4 = make_plot_scatter(source_df, category_list, color_col, color_palette,
 # bar chart 1
 source_df = df_covid_election[["state", "percent_turnout_mail_2016", "percent_turnout_mail_2020", "Total Cases",
            "Total Deaths", 'win_2020', 'win_2016']][df_covid_election["swing_state_2020"].notnull()]
-x_axis_list = swing_states
+x_axis_list = key
 title = "the percentage of turnout by mail in 2016 and 2020 election"
 y1 = "percent_turnout_mail_2016"
 y2 = "percent_turnout_mail_2020"
@@ -134,7 +139,7 @@ group_col = 'win_2020'
 use_col = 'tot_cases'
 y_label = 'total cases (thousands)'
 title = 'total cumulative cases for states where each party won in 2020'
-hover_list = [('Date', '@date{%F}'), 
+hover_list = [('Date', '@date{%F}'),
               ('Total Cases (thousands)', '@{tot_cases}{int}')]
 plot_6 = make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
 # daily 2
@@ -166,13 +171,13 @@ template = Template(
     """)
 
 
-html=file_html(Column(Row(plot_1, plot_2), 
-                        Row(plot_3, plot_4),
-                        Row(plot_5), 
-                        Row(plot_6, plot_7)), 
-                 template = template, resources = CDN)
+html=file_html(Column(Row(plot_1, plot_2),
+               Row(plot_3, plot_4),
+               Row(plot_5), 
+               Row(plot_6, plot_7)), 
+               template=template, resources=CDN)
 
-output_file='./example/plot_swingstate.html'
+output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
     f.write(html)
 view(output_file)
