@@ -1,15 +1,11 @@
 # Importing libraries
 from make_plot_swingstate import (make_plot_map, make_plot_scatter,
-								make_plot_bar, make_plot_time_series)
+           make_plot_bar, make_plot_time_series)
 import pandas as pd
 import geopandas as gpd
-from bokeh.layouts import column, row, widgetbox
-from bokeh.palettes import brewer
-from bokeh.plotting import figure
-from bokeh.transform import dodge, factor_cmap
 from bokeh.plotting import figure
 from bokeh.embed import file_html
-from bokeh.models import Div, Paragraph, Row, Column
+from bokeh.models import Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
 from add_data import (add_data)
