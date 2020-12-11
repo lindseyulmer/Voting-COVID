@@ -27,7 +27,7 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
              "West Virginia", "Maine", "New Hampshire", "Arizona",
              "Rhode Island"]
 # Define key states
-key = ["Arizona", "Florida", "Georgia", "Michigan", 
+key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
 class TestAddData(unittest.TestCase):
@@ -43,10 +43,10 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         add_data('data/coviddataand2020Election.csv',
-        'data/raw_7_keystates_covid_voting_issue_poll.csv',
-        'NAME', 'States', key, 
-        "CovidVoting/test/keystates_covid_2020voting_poll.csv")
-        
+                'data/raw_7_keystates_covid_voting_issue_poll.csv',
+                'NAME', 'States', key,
+                "CovidVoting/test/keystates_covid_2020voting_poll.csv")
+
     def test_oneshot(self):
         """One shot tests
         Args:
@@ -55,11 +55,14 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        df = pd.read_csv("CovidVoting/test/keystates_covid_2020voting_poll.csv", index_col=0)
-        df2 = pd.read_csv('data/keystates_covid_2020voting_poll.csv', index_col=0)
+        df = pd.read_csv(
+                         "CovidVoting/test/keystates_covid_2020voting_poll.csv",
+                          index_col=0)
+        df2 = pd.read_csv('data/keystates_covid_2020voting_poll.csv',
+                          index_col=0)
         self.assertEqual(
-        df.columns.all(), df2.columns.all())
-        
+                         df.columns.all(), df2.columns.all())
+
     def test_edge(self):
         """Edge Tests
         Args:
@@ -69,8 +72,8 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         with self.assertRaises(KeyError):
-            add_data('data/basedata.csv', 'data/raw_3_2020election.csv', "wrongname",
-            "States", allstates, "testresults.csv")
+            add_data('data/basedata.csv', 'data/raw_3_2020election.csv',
+                     "wrongname", "States", allstates, "testresults.csv")
 
 
 if __name__ == '__main__':
