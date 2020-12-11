@@ -20,24 +20,35 @@ from bokeh.embed import file_html
 from bokeh.models import Div, Paragraph, Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
+from CovidVoting.add_data import (add_data)
 from jinja2 import Template
 import os, glob
 current_location = os.getcwd()
 os.chdir(current_location)
 
 # define swing states
-swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
+key = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
                 "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
                 "Pennsylvania", "Texas", "Wisconsin"]
+#Define all states
+allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
+        "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia",
+        "Wisconsin", "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York",
+        "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota", "Indiana",
+        "Massachusetts","Kansas","Nevada","Vermont", "Connecticut","New Jersey",
+        "District of Columbia","North Carolina","Utah","North Dakota",
+         "South Carolina","Mississippi","Colorado","South Dakota","Oklahoma","Wyoming",
+        "West Virginia", "Maine","New Hampshire","Arizona","Rhode Island"]
 
 #print(current_location)
+"""
 
 # Read files
-contiguous_usa = gpd.read_file("./data/shapefiles/cb_2018_us_state_20m.shp")
-df_covid = pd.read_csv("./data/raw_2_covid_latest.csv")
-df_covid_daily = pd.read_csv("./data/raw_1_covid_daily.csv")
-df_election = pd.read_csv("./data/use_election.csv")
-df_state = pd.read_csv("./data/raw_0_states.csv")
+contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
+df_covid = pd.read_csv("data/raw_2_covid_latest.csv")
+df_covid_daily = pd.read_csv("data/raw_1_covid_daily.csv")
+df_election = pd.read_csv("data/use_election.csv")
+df_state = pd.read_csv("data/raw_0_states.csv")
 
 # Keep states which are in the shapefile contiguous_usa
 df_covid = df_covid.loc[df_covid["State/Territory"].isin(contiguous_usa["NAME"])]
@@ -61,6 +72,14 @@ df_covid_daily_swing = pd.merge(left=df_covid_daily_swing,
                                 right=df_election[["state", "win_2016", "win_2020"]], 
                                 left_on='state', right_on='state')
 print(df_covid_daily_swing.head())
+"""
+# use add_data to create covid_election.csv
+add_data('data/basedata.csv', "data/use_election.csv", 'NAME', "state", "data/covid_election.csv")
+# use add_data to create covid_daily_swing.csv
+add_data('data/basedata.csv','"data/raw_1_covid_daily.csv", "NAME", "state_code", "data/covid_daily_swing.csv")
+#read add_data results as a csv
+df_covid_election=pd.read_csv("data/covid_election.csv")
+df_covid_daily_swing=pd.read_csv("data/covid_daily_swing.csv")
 # map 1
 hover_list = [('State','@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
