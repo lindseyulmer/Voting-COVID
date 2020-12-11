@@ -3,10 +3,12 @@ In this module, the function make_plot uses the package Bokeh to help creating
 interactive plots to show voting and Covid data. 
 """
 import pandas as pd
+from bokeh.plotting import figure
+from bokeh.models.widgets import Panel, Tabs
 from bokeh.models import ColorBar, GeoJSONDataSource,
 HoverTool, LinearColorMapper
-from bokeh.models.widgets import Panel, Tabs
-from bokeh.plotting import figure
+
+
 
 def make_plot(covid, contiguous_usa, df_election):
     '''
@@ -46,27 +48,28 @@ def make_plot(covid, contiguous_usa, df_election):
     tick_labels_2020 = {'-8': 'Trump wins', '-6': '', '-4': '', '-2': '',
                         '2': '', '4': '', '6': '', '8': 'Biden wins'}
     tick_labels_2016 = {'-8': 'Trump wins', '-6': '', '-4': '',
-                        '-2': '', '2': '', '4': '', '6': '', '8': 'Clinton wins'}
-    
+                        '-2': '', '2': '', '4': '',
+                        '6': '', '8': 'Clinton wins'}
+
     # Create color bar.
     color_bar_2020 = ColorBar(color_mapper=color_mapper_2020,
                               label_standoff=10,
                               width=500, height=20,
                               border_line_color=None,
-                              location=(0,0), 
+                              location=(0,0),
                               orientation='horizontal',
                               major_label_overrides=tick_labels_2020)
-    color_bar_2016 = ColorBar(color_mapper=color_mapper_2016, 
+    color_bar_2016 = ColorBar(color_mapper=color_mapper_2016,
                               label_standoff=10,
                               width=500, height=20,
                               border_line_color=None,
-                              location=(0,0),
+                              location=(0, 0),
                               orientation='horizontal',
                               major_label_overrides=tick_labels_2016)
 
     # Create figure object
     p2020 = figure(title='COVID-19 cases & 2020 election',
-                   plot_height=600 ,
+                   plot_height=600,
                    plot_width=950,
                    toolbar_location='below',
                    tools="pan, wheel_zoom, box_zoom, reset")
@@ -82,30 +85,32 @@ def make_plot(covid, contiguous_usa, df_election):
 
     # Add patch renderer to figure
     states_2020 = p2020.patches('xs', 'ys', source=geosource,
-                           fill_color={'field' :'color_2020',
-                                         'transform' : color_mapper_2020},
-                           line_color="gray", 
-                           line_width=0.25, 
-                           fill_alpha=1)
-    states_2016 = p2016.patches('xs','ys', source=geosource,
+                                fill_color={'field':'color_2020',
+                                            'transform': color_mapper_2020},
+                                line_color="gray", 
+                                line_width=0.25,
+                                fill_alpha=1)
+    states_2016 = p2016.patches('xs', 'ys', source=geosource,
                                 fill_color={'field': 'color_2016',
-                                           'transform': color_mapper_2016},
+                                            'transform': color_mapper_2016},
                                 line_color="gray",
                                 line_width=0.25,
                                 fill_alpha=1)
     # Create hover tool
     p2020.add_tools(HoverTool(renderers=[states_2020],
-                                      tooltips = [('State', '@NAME'),
-                                                 ('Case Rate per 100000',
-                                                 '@{Case Rate per 100000}'),
-                                                  ('Confirmed cases', '@{Total Cases}'),
-                                                  ('Total deaths', '@{Total Deaths}')]))
+                              tooltips=[('State', '@NAME'),
+                                                  ('Case Rate per 100000',
+                                                   '@{Case Rate per 100000}'),
+                                                  ('Confirmed cases',
+                                                   '@{Total Cases}'),
+                                                  ('Total deaths',
+                                                   '@{Total Deaths}')]))
     p2016.add_tools(HoverTool(renderers=[states_2016],
                     tooltips=[('State', '@NAME'),
                               ('Case Rate per 100000',
-                                '@{Case Rate per 100000}'),
-                                ('Confirmed cases', '@{Total Cases}'),
-                                ('Total deaths', '@{Total Deaths}')]))
+                               '@{Case Rate per 100000}'),
+                              ('Confirmed cases', '@{Total Cases}'),
+                              ('Total deaths', '@{Total Deaths}')]))
     # Specify layout
     p2020.add_layout(color_bar_2020, 'below')
     p2016.add_layout(color_bar_2016, 'below')
