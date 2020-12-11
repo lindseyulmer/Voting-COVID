@@ -12,17 +12,22 @@ from CovidVoting.add_data import (add_data)
 print(os.getcwd())
 sys.path.append('..')
 # Define all states
-allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
-           "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia", "Wisconsin",
-           "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York", 
-           "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota",
-           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont", "Connecticut",
-           "New Jersey", "District of Columbia", "North Carolina", "Utah", "North Dakota",
-           "South Carolina", "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
+# Define all states
+allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
+           "Washington", "Alabama", "Arkansas", "New Mexico", "Texas",
+           "California", "Kentucky", "Georgia", "Wisconsin",
+           "Oregon", "Missouri", "Virginia", "Tennessee",
+           "Louisiana", "New York", "Michigan", "Idaho",
+           "Florida", "Illinois", "Montana", "Minnesota",
+           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+           "Connecticut", "New Jersey", "District of Columbia",
+           "North Carolina", "Utah", "North Dakota", "South Carolina",
+           "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
            "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
 # Define key states
-key=["Arizona", "Florida", "Georgia", "Michigan", "Minnesota", "North Carolina", "Ohio",
-         "Pennsylvania", "Texas", "Wisconsin"]
+key = ["Arizona", "Florida", "Georgia", "Michigan", 
+      "Minnesota", "North Carolina", "Ohio",
+      "Pennsylvania", "Texas", "Wisconsin"]
 class TestAddData(unittest.TestCase):
     """
     This class defines the tests for add_data.py.
@@ -64,9 +69,7 @@ class TestAddData(unittest.TestCase):
         with self.assertRaises(KeyError):
             add_data('data/basedata.csv', 'data/raw_3_2020election.csv', "wrongname",
             "States", allstates, "testresults.csv")
-        
-        
+
+
 if __name__ == '__main__':
-
-
     unittest.main()
