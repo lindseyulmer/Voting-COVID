@@ -28,7 +28,8 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
     source_df: (df)the data to show in the map
     shapefile: (shp)to make a map
     field: (df's col -> int) the variable used to fill colors
-    range_col: (df's col -> int) the variable used to map numbers in a range, into a sequence of colors (the condition of results)
+    range_col: (df's col -> int) the variable used to map numbers in a range,
+    into a sequence of colors (the condition of results)
     hover_list: (list) 
     title: (string)the title of the map
     '''
@@ -40,7 +41,8 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
     # Input GeoJSON source that contains features for plotting
     geosource = GeoJSONDataSource(geojson = map_info.to_json())
 
-    base_colors = ["#cb181d", "#fb6a4a", "#fcae91", "#fee5d9", "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
+    base_colors = ["#cb181d", "#fb6a4a", "#fcae91", "#fee5d9",
+                   "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
     # Instantiate LinearColorMapper that linearly maps numbers in a range, into a sequence of colors.
     color_mapper = LinearColorMapper(palette = base_colors,
                                      low = source_df[range_col].min(),
@@ -93,7 +95,8 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
     p.title.text_font_size = "15px"
     #p.border_fill_color = "whitesmoke"
     p.background_fill_color = "beige"
-    sub_text = Title(text="", align='left', text_font_size='12px', text_color = "#A6ACAF")
+    sub_text = Title(text="", align='left',
+                     text_font_size='12px', text_color = "#A6ACAF")
     p.add_layout(sub_text, 'below')
     
     return p
@@ -102,8 +105,9 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
 def make_plot_scatter(source_df, category_list, color_col, color_palette,
                       x_col, y_col, hover_list, x_label, y_label, title, subtitle):
     """
-    function: make a scatter plot to show the relationship among COVID-19 positive cases,
-              deaths and election results in the swing states
+    function: make a scatter plot to show the relationship
+    among COVID-19 positive cases,
+    deaths and election results in the swing states
               
     source_df: (dataframe)
     category_list: (list)
@@ -117,7 +121,8 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     p = figure(plot_height = 400, toolbar_location=None)
     p.scatter(x=x_col, y=y_col,
               source=source_df,
-              color=factor_cmap(color_col, palette=color_palette, factors=category_list),
+              color=factor_cmap(color_col,
+                                palette=color_palette, factors=category_list),
               size=10, legend=color_col)
 
     p.title.text = title
@@ -133,17 +138,21 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     #p.border_fill_color = "whitesmoke"
     p.title.text_font_size = "15px"
     
-    sub_text = Title(text=subtitle, align='left', text_font_size='12px', text_color="#A6ACAF")
+    sub_text = Title(text=subtitle, align='left',
+                     text_font_size='12px', text_color="#A6ACAF")
     p.add_layout(sub_text, 'above')
-    sub_text = Title(text="", align='left', text_font_size='12px', text_color="#A6ACAF")
+    sub_text = Title(text="", align='left',
+                     text_font_size='12px', text_color="#A6ACAF")
     p.add_layout(sub_text, 'below')
 
     return p
 
 
-def make_plot_bar(source_df, x_axis_list, title, y1, y2, y1_label, y2_label, hover_list):
+def make_plot_bar(source_df, x_axis_list, title, y1,
+                  y2, y1_label, y2_label, hover_list):
     '''
-    function: make a bar chart to compare the percentage of turnout by mail in 2016 and 2020 election
+    function: make a bar chart to compare the
+    percentage of turnout by mail in 2016 and 2020 election
 
     source_df: (df)
     x_axis_list: (list)
@@ -157,37 +166,40 @@ def make_plot_bar(source_df, x_axis_list, title, y1, y2, y1_label, y2_label, hov
     # change dataframe to ColumnDataSource for Bokeh
     source = ColumnDataSource(data=source_df)
 
-    p = figure(x_range=x_axis_list, y_range=(0, 1), plot_height=400, plot_width=1200, title=title,
+    p = figure(x_range=x_axis_list, y_range=(0, 1),
+               plot_height=400, plot_width=1200, title=title,
                toolbar_location=None, tools="hover", tooltips=hover_list)
 
-    p.vbar(x=dodge("state", -0.15, range=p.x_range), top=y1, width=0.2, source=source,
+    p.vbar(x=dodge("state", -0.15, range=p.x_range),
+           top=y1, width=0.2, source=source,
            color="#CAAD8D", legend_label=y1_label, name='win_2016')
 
-    p.vbar(x=dodge("state",  0.15,  range=p.x_range), top=y2, width=0.2, source=source,
+    p.vbar(x=dodge("state",  0.15,  range=p.x_range),
+           top=y2, width=0.2, source=source,
            color="#F4D03F", legend_label=y2_label, name='win_2020')
 
     hover = HoverTool()
     hover.tooltips = hover_list
     p.add_tools(hover)
 
-    #p.x_range.range_padding = 0.2
+    # p.x_range.range_padding = 0.2
     p.xgrid.grid_line_color = None
     p.legend.location = "top_right"
     p.legend.orientation = "horizontal"
 
-    #p.border_fill_color = "whitesmoke"
+    # p.border_fill_color = "whitesmoke"
     p.title.text_font_size = "15px"
     p.background_fill_color = "beige"
-    sub_text = Title(text="", align='left', text_font_size='12px', text_color = "#A6ACAF")
+    sub_text = Title(text="", align='left',
+                     text_font_size='12px', text_color="#A6ACAF")
     p.add_layout(sub_text, 'below')
     return p
 
 
 def make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list):
     '''
-    function: make a time series chart to show the total cumulative cases for states where 
+    function: make a time series chart to show the total cumulative cases for states where
               each party won in the election
-
     source_df: (df)
     group_col: (string) group by date and what 
     use_col: (string) the variables to show in the plot
@@ -197,32 +209,29 @@ def make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_l
     '''
 
     # make groups
-    grouped = source_df.groupby(['date', group_col])[use_col].sum().reset_index()
+    grouped = source_df.groupby(['date',
+                                 group_col])[use_col].sum().reset_index()
     grouped[use_col] = grouped[use_col]/1000
-    r_group = grouped[grouped[group_col]=="Republican"]
-    d_group = grouped[grouped[group_col]=="Democratic"]
+    r_group = grouped[grouped[group_col] == "Republican"]
+    d_group = grouped[grouped[group_col] == "Democratic"]
 
     # Create a ColumnDataSource object for each group
     r_cds = ColumnDataSource(r_group)
     d_cds = ColumnDataSource(d_group)
-
-
     # Create and configure the figure
     p = figure(x_axis_type='datetime',
-                 plot_height=400, plot_width=600,
-                 title=title,
-                 x_axis_label='Date', y_axis_label=y_label,
-                 toolbar_location=None)
+               plot_height=400, plot_width=600,
+               title=title,
+               x_axis_label='Date', y_axis_label=y_label,
+               toolbar_location=None)
 
     # Render the race as step lines
     p.line('date', use_col, line_width=3,
-             color="#5DADE2", legend_label='Democratic', 
-             source=d_cds)
+           color="#5DADE2", legend_label='Democratic', 
+           source=d_cds)
     p.line('date', use_col, line_width=3,
-             color="#EC7063", legend_label='Republican', 
-             source=r_cds)
-
-
+           color="#EC7063", legend_label='Republican', 
+           source=r_cds)
     hover = HoverTool(tooltips=hover_list,
                       formatters={'@date': 'datetime'})
 
@@ -231,7 +240,7 @@ def make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_l
     # Move the legend to the upper left corner
 
     p.legend.location = 'top_left'
-    #p.border_fill_color = "whitesmoke"
+    # p.border_fill_color = "whitesmoke"
     p.title.text_font_size = "15px"
     p.background_fill_color = "beige"
     # Show the plot
