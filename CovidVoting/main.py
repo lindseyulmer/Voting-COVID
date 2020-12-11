@@ -20,7 +20,7 @@ from bokeh.embed import file_html
 from bokeh.models import Div, Paragraph, Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
-from CovidVoting.add_data import (add_data)
+from add_data import (add_data)
 from jinja2 import Template
 import os, glob
 current_location = os.getcwd()
@@ -41,10 +41,11 @@ allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "
         "West Virginia", "Maine","New Hampshire","Arizona","Rhode Island"]
 
 #print(current_location)
-"""
+
 
 # Read files
 contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
+"""
 df_covid = pd.read_csv("data/raw_2_covid_latest.csv")
 df_covid_daily = pd.read_csv("data/raw_1_covid_daily.csv")
 df_election = pd.read_csv("data/use_election.csv")
@@ -74,9 +75,9 @@ df_covid_daily_swing = pd.merge(left=df_covid_daily_swing,
 print(df_covid_daily_swing.head())
 """
 # use add_data to create covid_election.csv
-add_data('data/basedata.csv', "data/use_election.csv", 'NAME', "state", "data/covid_election.csv")
+add_data('data/basedata.csv', "data/use_election.csv", 'NAME', "state", allstates, "data/covid_election.csv")
 # use add_data to create covid_daily_swing.csv
-add_data('data/basedata.csv','"data/raw_1_covid_daily.csv", "NAME", "state_code", "data/covid_daily_swing.csv")
+add_data('data/basedata.csv',"data/raw_1_covid_daily.csv", "NAME", "state_code", key, "data/covid_daily_swing.csv")
 #read add_data results as a csv
 df_covid_election=pd.read_csv("data/covid_election.csv")
 df_covid_daily_swing=pd.read_csv("data/covid_daily_swing.csv")
