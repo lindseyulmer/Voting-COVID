@@ -30,6 +30,8 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
 key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
+
+
 class TestAddData(unittest.TestCase):
     """
     This class defines the tests for add_data.py.
@@ -43,9 +45,9 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         add_data('data/coviddataand2020Election.csv',
-                'data/raw_7_keystates_covid_voting_issue_poll.csv',
-                'NAME', 'States', key,
-                "CovidVoting/test/keystates_covid_2020voting_poll.csv")
+                 'data/raw_7_keystates_covid_voting_issue_poll.csv',
+                 'NAME', 'States', key,
+                 "CovidVoting/test/keystates_covid_2020voting_poll.csv")
 
     def test_oneshot(self):
         """One shot tests
@@ -56,8 +58,8 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         df = pd.read_csv(
-                         "CovidVoting/test/keystates_covid_2020voting_poll.csv",
-                          index_col=0)
+          "CovidVoting/test/keystates_covid_2020voting_poll.csv",
+          index_col=0)
         df2 = pd.read_csv('data/keystates_covid_2020voting_poll.csv',
                           index_col=0)
         self.assertEqual(
