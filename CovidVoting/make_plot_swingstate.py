@@ -3,30 +3,21 @@ module_text
 '''
 
 # Importing libraries
-import pandas as pd
-import numpy as np
-import geopandas as gpd
-import json
-from bokeh.io import output_notebook, show, reset_output
-from bokeh.models import (CDSView, ColorBar, ColumnDataSource,
-                          CustomJS, CustomJSFilter, Div,
+from bokeh.models import (ColorBar, ColumnDataSource,
+                          Div,
                           GeoJSONDataSource, HoverTool,
-                          LinearColorMapper, Slider,
-                          LogColorMapper, Legend, Title)
-from bokeh.layouts import column, row, widgetbox
-from bokeh.palettes import brewer
+                          LinearColorMapper,
+                          Title)
 from bokeh.plotting import figure
 from bokeh.transform import dodge, factor_cmap
 from bokeh.plotting import figure
-from bokeh.embed import file_html
 from bokeh.models import Div, Paragraph, Row, Column
-from bokeh.resources import CDN
 from bokeh.util.browser import view
 from jinja2 import Template
 
 # define swing states
-swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
-                "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
+swing_states = ["Arizona", "Florida", "Georgia", "Michigan",
+                "Minnesota", "North Carolina", "Ohio",
                 "Pennsylvania", "Texas", "Wisconsin"]
 
 
@@ -49,7 +40,7 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
     # Input GeoJSON source that contains features for plotting
     geosource = GeoJSONDataSource(geojson = map_info.to_json())
 
-    base_colors = ["#cb181d","#fb6a4a","#fcae91","#fee5d9","#eff3ff","#bdd7e7","#6baed6","#2171b5"]
+    base_colors = ["#cb181d", "#fb6a4a", "#fcae91", "#fee5d9", "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
     # Instantiate LinearColorMapper that linearly maps numbers in a range, into a sequence of colors.
     color_mapper = LinearColorMapper(palette = base_colors,
                                      low = source_df[range_col].min(),
@@ -66,35 +57,35 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
                    '8':'Biden wins'}
 
     # Create color bar.
-    color_bar = ColorBar(color_mapper = color_mapper, 
-                         label_standoff = 5,
-                         width = 200, height = 10,
-                         border_line_color = None,
-                         location = (0,0), 
-                         orientation = 'horizontal',
-                         major_label_overrides = tick_labels
+    color_bar = ColorBar(color_mapper=color_mapper, 
+                         label_standoff=5,
+                         width=200, height=10,
+                         border_line_color=None,
+                         location=(0,0), 
+                         orientation='horizontal',
+                         major_label_overrides=tick_labels
                         )
 
     # Create figure object
-    p = figure(title = title, 
-                      plot_height = 400,
-                      plot_width = 600,
+    p = figure(title=title, 
+                      plot_height=400,
+                      plot_width=600,
                       toolbar_location=None
-                      #toolbar_location = 'below',
-                      #tools = "pan, wheel_zoom, box_zoom, reset"
+                      #toolbar_location='below',
+                      #tools="pan, wheel_zoom, box_zoom, reset"
                       )
     p.xgrid.grid_line_color = None
     p.ygrid.grid_line_color = None
 
     # Add patch renderer to figure
-    states = p.patches('xs','ys', source = geosource,
-                               fill_color = {'field' :field,
-                                             'transform' : color_mapper},
-                               line_color = "gray", 
-                               line_width = 0.25, 
-                               fill_alpha = 1)
+    states = p.patches('xs','ys', source=geosource,
+                               fill_color={'field' :field,
+                                           'transform' : color_mapper},
+                               line_color="gray", 
+                               line_width=0.25, 
+                               fill_alpha=1)
     # Create hover tool
-    p.add_tools(HoverTool(renderers = [states], tooltips = hover_list))
+    p.add_tools(HoverTool(renderers=[states], tooltips=hover_list))
 
     # Specify layout
     p.add_layout(color_bar, 'below')
@@ -126,7 +117,7 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     p = figure(plot_height = 400, toolbar_location=None)
     p.scatter(x=x_col, y=y_col,
               source=source_df,
-              color=factor_cmap(color_col, palette = color_palette, factors = category_list),
+              color=factor_cmap(color_col, palette=color_palette, factors=category_list),
               size=10, legend=color_col)
 
     p.title.text = title
@@ -142,9 +133,9 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     #p.border_fill_color = "whitesmoke"
     p.title.text_font_size = "15px"
     
-    sub_text = Title(text=subtitle, align='left', text_font_size='12px', text_color = "#A6ACAF")
+    sub_text = Title(text=subtitle, align='left', text_font_size='12px', text_color="#A6ACAF")
     p.add_layout(sub_text, 'above')
-    sub_text = Title(text="", align='left', text_font_size='12px', text_color = "#A6ACAF")
+    sub_text = Title(text="", align='left', text_font_size='12px', text_color="#A6ACAF")
     p.add_layout(sub_text, 'below')
 
     return p
