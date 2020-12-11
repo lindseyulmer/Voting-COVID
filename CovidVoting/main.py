@@ -14,7 +14,8 @@ from bokeh.resources import CDN
 from bokeh.util.browser import view
 from add_data import (add_data)
 from jinja2 import Template
-import os, glob
+import os
+import glob
 current_location = os.getcwd()
 os.chdir(current_location)
 
@@ -24,15 +25,15 @@ key = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
        "Pennsylvania", "Texas", "Wisconsin"]
 #Define all states
 allstates=["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska", "Washington",
-	   "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia",
-	   "Wisconsin", "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York",
-	   "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota", "Indiana",
-	   "Massachusetts", "Kansas", "Nevada", "Vermont", "Connecticut", "New Jersey",
-	   "District of Columbia", "North Carolina", "Utah", "North Dakota",
-	   "South Carolina", "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
-	   "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
+           "Alabama", "Arkansas", "New Mexico", "Texas", "California", "Kentucky", "Georgia", "Wisconsin",
+           "Oregon", "Missouri", "Virginia", "Tennessee", "Louisiana", "New York", 
+           "Michigan", "Idaho", "Florida", "Illinois", "Montana", "Minnesota",
+           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont", "Connecticut",
+           "New Jersey", "District of Columbia", "North Carolina", "Utah", "North Dakota",
+           "South Carolina", "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
+           "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
 
-#print(current_location)
+# print(current_location)
 
 
 # Read files
@@ -55,8 +56,8 @@ df_covid_election["swing_state_2020"]= np.where(df_covid_election["state"].isin(
 df_covid_election["swing_state_2016"]= np.where(df_covid_election["state"].isin(swing_states), 
 						df_covid_election['color_2016'], np.nan)
 # process daily covid data
-df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", "state"]], 
-						left_on='state_code', right_on='state_code')
+df_covid_daily = pd.merge(left=df_covid_daily, right=df_state[["state_code", 
+           "state"]], left_on='state_code', right_on='state_code')
 df_covid_daily['date'] = pd.to_datetime(df_covid_daily['date'], format='%m/%d/%Y')
 
 # data for swing states
@@ -71,15 +72,15 @@ add_data('data/basedata.csv', "data/use_election.csv", 'NAME', "state", allstate
 # use add_data to create covid_daily_swing.csv
 add_data('data/basedata.csv',"data/raw_1_covid_daily.csv", "NAME", "state_code", key, "data/covid_daily_swing.csv")
 #read add_data results as a csv
-df_covid_election=pd.read_csv("data/covid_election.csv")
-df_covid_daily_swing=pd.read_csv("data/covid_daily_swing.csv")
+df_covid_election = pd.read_csv("data/covid_election.csv")
+df_covid_daily_swing = pd.read_csv("data/covid_daily_swing.csv")
 # map 1
-hover_list = [('State','@NAME')]
+hover_list = [('State', '@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
                            'swing_state_2020', 'color_2020', hover_list,
                            '2020 Election Result of Swing States')
 # map 2
-hover_list = [('State','@NAME')]
+hover_list = [('State', '@NAME')]
 plot_2 = make_plot_map(df_covid_election, contiguous_usa,
                            'swing_state_2016', 'color_2016', hover_list,
                            '2016 Election Result of Swing States')
@@ -92,7 +93,7 @@ hover_list = [('State', '@state'),
               ('Total Cases', '@{Total Cases}'),
               ('Total Deaths', '@{Total Deaths}')]
 color_col = 'win_2020'
-color_palette = ["#5DADE2","#EC7063"]
+color_palette = ["#5DADE2", "#EC7063"]
 title = 'Total cases and total deaths in swing states'
 subtitle = "colors from 2020 election results"
 x_label = 'the number of total cases'
@@ -102,38 +103,39 @@ plot_3 = make_plot_scatter(source_df, category_list, color_col, color_palette,
 # scatter plot 2
 category_list = ['Democratic', 'Republican']
 source_df = df_covid_election[df_covid_election['state'].isin(swing_states)]
-x_col='Total Cases'
-y_col='Total Deaths'
-hover_list=[('State', '@state'),
+x_col = 'Total Cases'
+y_col = 'Total Deaths'
+hover_list = [('State', '@state'),
 	    ('Total Cases', '@{Total Cases}'),
 	    ('Total Deaths', '@{Total Deaths}')]
-color_col='win_2016'
-color_palette=["#5DADE2","#EC7063"]
-title='Total cases and total deaths in swing states'
-subtitle="colors from 2016 election results"
-x_label='the number of total cases'
-y_label='the number of total deaths'
-plot_4=make_plot_scatter(source_df, category_list, color_col, color_palette,
+color_col = 'win_2016'
+color_palette = ["#5DADE2", "#EC7063"]
+title = 'Total cases and total deaths in swing states'
+subtitle = "colors from 2016 election results"
+x_label = 'the number of total cases'
+y_label = 'the number of total deaths'
+plot_4 = make_plot_scatter(source_df, category_list, color_col, color_palette,
                            x_col, y_col, hover_list, x_label, y_label, title, subtitle)
 # bar chart 1
-source_df=df_covid_election[["state", "percent_turnout_mail_2016", "percent_turnout_mail_2020", "Total Cases", "Total Deaths", 'win_2020', 'win_2016']][df_covid_election["swing_state_2020"].notnull()]
-x_axis_list=swing_states
-title="the percentage of turnout by mail in 2016 and 2020 election"
-y1="percent_turnout_mail_2016"
-y2="percent_turnout_mail_2020"
+source_df = df_covid_election[["state", "percent_turnout_mail_2016", "percent_turnout_mail_2020", "Total Cases",
+           "Total Deaths", 'win_2020', 'win_2016']][df_covid_election["swing_state_2020"].notnull()]
+x_axis_list = swing_states
+title = "the percentage of turnout by mail in 2016 and 2020 election"
+y1 = "percent_turnout_mail_2016"
+y2 = "percent_turnout_mail_2020"
 y1_label = "2016"
 y2_label = "2020"
-hover_list=[("win","@$name"), 
+hover_list = [("win","@$name"), 
             ('Total Cases', '@{Total Cases}'),
             ('Total Deaths', '@{Total Deaths}')]
-plot_5=make_plot_bar(source_df, x_axis_list, title, y1, y2, y1_label, y2_label, hover_list)
+plot_5 = make_plot_bar(source_df, x_axis_list, title, y1, y2, y1_label, y2_label, hover_list)
 # daily 1
-source_df=df_covid_daily_swing
-group_col='win_2020'
-use_col='tot_cases'
-y_label='total cases (thousands)'
-title='total cumulative cases for states where each party won in 2020'
-hover_list=[('Date', '@date{%F}'), 
+source_df = df_covid_daily_swing
+group_col = 'win_2020'
+use_col = 'tot_cases'
+y_label = 'total cases (thousands)'
+title = 'total cumulative cases for states where each party won in 2020'
+hover_list = [('Date', '@date{%F}'), 
               ('Total Cases (thousands)', '@{tot_cases}{int}')]
 plot_6=make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
 # daily 2
