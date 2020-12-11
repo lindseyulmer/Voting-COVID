@@ -1,9 +1,8 @@
 # Importing libraries
 from make_plot_swingstate import (make_plot_map, make_plot_scatter,
-           make_plot_bar, make_plot_time_series)
+                                  make_plot_bar, make_plot_time_series)
 import pandas as pd
 import geopandas as gpd
-from bokeh.plotting import figure
 from bokeh.embed import file_html
 from bokeh.models import Row, Column
 from bokeh.resources import CDN
@@ -11,7 +10,6 @@ from bokeh.util.browser import view
 from add_data import (add_data)
 from jinja2 import Template
 import os
-import glob
 current_location = os.getcwd()
 os.chdir(current_location)
 
@@ -31,13 +29,10 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
              "West Virginia", "Maine", "New Hampshire", "Arizona",
              "Rhode Island"]
 # Define key states
-key = ["Arizona", "Florida", "Georgia", "Michigan", 
+key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
-
 # print(current_location)
-
-
 # Read files
 contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
 """
@@ -167,15 +162,15 @@ template = Template(
             {{ plot_div | safe }}
             {{ plot_script | safe }}
         </body>
-    </html> 
+    </html>
     """)
 
 
-html=file_html(Column(Row(plot_1, plot_2),
-               Row(plot_3, plot_4),
-               Row(plot_5), 
-               Row(plot_6, plot_7)), 
-               template=template, resources=CDN)
+html = file_html(Column(Row(plot_1, plot_2),
+                 Row(plot_3, plot_4),
+                 Row(plot_5),
+                 Row(plot_6, plot_7)),
+                 template=template, resources=CDN)
 
 output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
