@@ -19,23 +19,27 @@ case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', "Hawaii",
                                                          "Puerto Rico"])]
 case_states.to_csv('basedata.csv')
 case_states.head()
-# Define all states
-allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
-           "Washington", "Alabama", "Arkansas", "New Mexico", "Texas",
-           "California", "Kentucky", "Georgia", "Wisconsin",
-           "Oregon", "Missouri", "Virginia", "Tennessee",
-           "Louisiana", "New York", "Michigan", "Idaho",
-           "Florida", "Illinois", "Montana", "Minnesota",
-           "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-           "Connecticut", "New Jersey", "District of Columbia",
-           "North Carolina", "Utah", "North Dakota", "South Carolina",
-           "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
-           "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
+# Define allstates
+allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
+             "Pennsylvania", "Nebraska", "Washington",
+             "Alabama", "Arkansas", "New Mexico", "Texas",
+             "California", "Kentucky", "Georgia", "Wisconsin",
+             "Oregon", "Missouri", "Virginia", "Tennessee",
+             "Louisiana", "New York", "Michigan", "Idaho",
+             "Florida", "Illinois", "Montana", "Minnesota",
+             "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+             "Connecticut", "New Jersey", "District of Columbia",
+             "North Carolina", "Utah", "North Dakota", "South Carolina",
+             "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
+             "West Virginia", "Maine", "New Hampshire", "Arizona",
+             "Rhode Island"]
 # Define key states
 key = ["Arizona", "Florida", "Georgia", "Michigan", 
-      "Minnesota", "North Carolina", "Ohio",
-      "Pennsylvania", "Texas", "Wisconsin"]
-def add_data(startdata,newdatafile,startdatastate, newdatastate,
+       "Minnesota", "North Carolina", "Ohio",
+       "Pennsylvania", "Texas", "Wisconsin"]
+
+
+def add_data(startdata, newdatafile, startdatastate, newdatastate,
               states, newfilename):
     """
     Args:
