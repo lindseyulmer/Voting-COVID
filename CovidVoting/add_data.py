@@ -32,9 +32,9 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio", "Pennsylvania", "Nebraska",
            "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming", 
            "West Virginia", "Maine", "New Hampshire", "Arizona", "Rhode Island"]
 # Define key states
-key=["Arizona", "Florida", "Georgia", "Michigan", 
-     "Minnesota", "North Carolina", "Ohio",
-     "Pennsylvania", "Texas", "Wisconsin"]
+key = ["Arizona", "Florida", "Georgia", "Michigan", 
+      "Minnesota", "North Carolina", "Ohio",
+      "Pennsylvania", "Texas", "Wisconsin"]
 def add_data(startdata,newdatafile,startdatastate, newdatastate,
               states, newfilename):
     """
