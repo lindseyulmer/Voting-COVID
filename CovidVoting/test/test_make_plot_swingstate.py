@@ -27,8 +27,10 @@ import os
 import glob
 
 # define swing states
-swing_states = ["Arizona", "Colorado", "Florida", "Georgia", "Iowa", "Michigan",
-                "Minnesota", "Nevada", "New Hampshire", "North Carolina", "Ohio",
+swing_states = ["Arizona", "Colorado", "Florida",
+                "Georgia", "Iowa", "Michigan",
+                "Minnesota", "Nevada", "New Hampshire",
+                "North Carolina", "Ohio",
                 "Pennsylvania", "Texas", "Wisconsin"]
 
 # Read files
@@ -109,8 +111,9 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         group_col = 'win_2020'
         use_col = 'tot_cases'
         y_label = 'total cases (thousands)'
-        title = 'total cumulative cases for states where each party won in 2020'
-        hover_list = [('Date', '@date{%F}'), 
+        title =
+        'total cumulative cases for states where each party won in 2020'
+        hover_list = [('Date', '@date{%F}'),
                       ('Total Cases (thousands)', '@{tot_cases}{int}')]
         p = make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
         self.assertEqual(str(type(p)),"<class 'bokeh.plotting.figure.Figure'>")
@@ -130,23 +133,23 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
     def test_oneshot_1(self):
         """oneshot test"""
         n_neighbors = 5
-        data = np.array([[2,3,1,5], [8,10,2,3], [1,3,2,14],[2,9,3,100], [9,5,10,20], [6,7,8,50]])
+        data = np.array([[2,3,1,5], [8,10,2,3],
+        [1,3,2,14],[2,9,3,100], [9,5,10,20], [6,7,8,50]])
 
     def test_edge_01(self):
         """type error - n_neighbors"""
         n_neighbors = "2"
         data = np.array([[0,0,5],[2,2,2]])
         query = np.array([1,1])
-        self.assertRaisesRegex(TypeError, "Only integers are allowed in variable \"n_neighbors\".",
-                               knn_regression, n_neighbors, data, query)        query = np.array([3,7,9])
+        self.assertRaisesRegex(TypeError,
+        "Only integers are allowed in variable \"n_neighbors\".",
+                               knn_regression, n_neighbors, data, query)
+                               query = np.array([3,7,9])
         self.assertEqual(knn_regression(n_neighbors, data, query), 37.8)
 
 '''
 
 if __name__ == '__main__':
-
-
-
     unittest.main()
 '''    
     suite = unittest.TestLoader().loadTestsFromTestCase(UnitTestsMakePlot)
