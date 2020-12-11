@@ -51,8 +51,9 @@ df_election = df_election.loc[df_election[
 df_covid_election = pd.merge(left=df_covid, right=df_election, how='right',
                              left_on='State/Territory', right_on='state')
 df_covid_election["swing_state_2020"]= np.where(df_covid_election[
-                                                "state"].isin(swing_states), 
-                                                df_covid_election['color_2020'], np.nan)
+                                                "state"].isin(swing_states),
+                                                df_covid_election[
+                                                'color_2020'], np.nan)
 df_covid_election["swing_state_2016"]= np.where(df_covid_election[
                                                 "state"].isin(swing_states),
                                                 df_covid_election['color_2016'],
@@ -128,8 +129,8 @@ plot_4 = make_plot_scatter(source_df, category_list, color_col, color_palette,
 # bar chart 1
 source_df = df_covid_election[["state", "percent_turnout_mail_2016",
                                "percent_turnout_mail_2020", "Total Cases",
-           "Total Deaths", 'win_2020', 'win_2016']][df_covid_election[
-                                                                      "swing_state_2020"].notnull()]
+                               "Total Deaths", 'win_2020', 'win_2016']][df_covid_election[
+                               "swing_state_2020"].notnull()]
 x_axis_list = key
 title = "the percentage of turnout by mail in 2016 and 2020 election"
 y1 = "percent_turnout_mail_2016"
