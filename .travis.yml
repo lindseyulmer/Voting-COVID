@@ -28,8 +28,7 @@ before_install:
 install:
     - conda env create -f environment.yml
     - conda activate env_583
-    - conda install --yes coverage coveralls
-    - conda install flake8
+    - conda install --yes coverage coveralls flake8
 
 # a list of commands to run before the main script
 before_script:
