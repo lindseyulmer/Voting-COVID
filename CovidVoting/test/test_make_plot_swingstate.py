@@ -10,7 +10,6 @@ from CovidVoting.make_plot_swingstate import (make_plot_map,
                                               make_plot_scatter,
                                               make_plot_bar,
                                               make_plot_time_series)
-from bokeh.models import (Div) 
 sys.path.append("..")
 print(os.getcwd())
 
@@ -126,7 +125,7 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
                                   use_col, y_label, title, hover_list)
         self.assertEqual(str(type(p)),
                          "<class 'bokeh.plotting.figure.Figure'>")
-  
+
 
 '''
     def test_html(self):
