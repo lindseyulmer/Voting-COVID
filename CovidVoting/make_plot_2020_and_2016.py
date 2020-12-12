@@ -9,7 +9,6 @@ from bokeh.models import ColorBar, GeoJSONDataSource,
 HoverTool, LinearColorMapper
 
 
-
 def make_plot(covid, contiguous_usa, df_election):
     '''
     This function makes maps to show 2020 or 2016 election results
@@ -56,7 +55,7 @@ def make_plot(covid, contiguous_usa, df_election):
                               label_standoff=10,
                               width=500, height=20,
                               border_line_color=None,
-                              location=(0,0),
+                              location=(0, 0),
                               orientation='horizontal',
                               major_label_overrides=tick_labels_2020)
     color_bar_2016 = ColorBar(color_mapper=color_mapper_2016,
@@ -85,9 +84,9 @@ def make_plot(covid, contiguous_usa, df_election):
 
     # Add patch renderer to figure
     states_2020 = p2020.patches('xs', 'ys', source=geosource,
-                                fill_color={'field':'color_2020',
+                                fill_color={'field': 'color_2020',
                                             'transform': color_mapper_2020},
-                                line_color="gray", 
+                                line_color="gray",
                                 line_width=0.25,
                                 fill_alpha=1)
     states_2016 = p2016.patches('xs', 'ys', source=geosource,
@@ -99,12 +98,12 @@ def make_plot(covid, contiguous_usa, df_election):
     # Create hover tool
     p2020.add_tools(HoverTool(renderers=[states_2020],
                               tooltips=[('State', '@NAME'),
-                                                  ('Case Rate per 100000',
-                                                   '@{Case Rate per 100000}'),
-                                                  ('Confirmed cases',
-                                                   '@{Total Cases}'),
-                                                  ('Total deaths',
-                                                   '@{Total Deaths}')]))
+                                        ('Case Rate per 100000',
+                                         '@{Case Rate per 100000}'),
+                                        ('Confirmed cases',
+                                         '@{Total Cases}'),
+                                        ('Total deaths',
+                                         '@{Total Deaths}')]))
     p2016.add_tools(HoverTool(renderers=[states_2016],
                     tooltips=[('State', '@NAME'),
                               ('Case Rate per 100000',
