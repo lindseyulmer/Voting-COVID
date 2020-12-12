@@ -29,12 +29,12 @@ install:
     - conda env create -f environment.yml
     - conda activate env_583
     - conda install --yes coverage coveralls
-    - pip install pylint
+    - conda install flake8
 
 # a list of commands to run before the main script
 before_script:
    - python --version
-   - "pylint CovidVoting --errors-only"
+   - "flake8 CovidVoting --exit-zero"
 
 # the actual commands to runs
 script:
