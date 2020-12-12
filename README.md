@@ -1,5 +1,5 @@
 # Voting-COVID
-[![Build Status](https://travis-ci.org/lindseyulmer/Voting-COVID.svg?branch=main)](https://travis-ci.org/lindseyulmer/Voting-COVID)<br />
+[![Build Status](https://travis-ci.org/lindseyulmer/Voting-COVID.svg?branch=main)](https://travis-ci.org/lindseyulmer/Voting-COVID)<br /> [![Coverage Status](https://coveralls.io/repos/github/lindseyulmer/Voting-COVID/badge.svg?branch=main)](https://coveralls.io/github/lindseyulmer/Voting-COVID?branch=main)
 The purpose of this project is to use our module to visualize COVID and election data on the same plot, so that people can better discern the political ramifications of the pandemic.
 ## Directory Structure
 ```bash  
