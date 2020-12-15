@@ -38,9 +38,9 @@ We have the example codes of using our module in `main.py`. You can find the res
 #### make_plot_scatter(source_df, category_list, color_col, color_palette, x_col, y_col, hover_list, x_label, y_label, title, subtitle)
     -Make scatter plots for swing state data
 #### make_plot_bar(source_df, x_axis_list, title, y_1, y_2, y1_label, y2_label, hover_list)
-   -Make bar charts for swing state data
+    -Make bar charts for swing state data
 #### make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
--Make time series plot the examples in main.py is for just swing states, but it could be used for all states as well
+    -Make time series plot the examples in main.py is for just swing states, but it could be used for all states as well
 ## Directory Structure
 ```bash  
 ├── CovidVoting
