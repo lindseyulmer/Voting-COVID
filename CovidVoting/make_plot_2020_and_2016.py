@@ -29,18 +29,20 @@ def make_plot(df_covid_election, contiguous_usa):
                    "#fee5d9", "#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]
     # Instantiate LinearColorMapper that linearly maps numbers in a range,
     # into a sequence of colors.
+    low2020 = df_covid_election["color_2020"].min()
+    high2020 = df_covid_election["color_2020"].max()
     color_mapper_2020 = LinearColorMapper(palette=base_colors,
-                                          low=df_covid_election["color_2020"].min(),
-                                          high=df_covid_election["color_2020"].max())
+                                          low=low2020, high=high2020)
+    low2016 = df_covid_election["color_2016"].min()
+    high2016 = df_covid_election["color_2016"].max()
     color_mapper_2016 = LinearColorMapper(palette=base_colors,
-                                          low=df_covid_election["color_2016"].min(),
-                                          high=df_covid_election["color_2016"].max())
+                                          low=low2016, high=high2016)
     tick_labels_2020 = {'-8': 'Trump wins', '-6': '', '-4': '', '-2': '',
                         '2': '', '4': '', '6': '', '8': 'Biden wins'}
     tick_labels_2016 = {'-8': 'Trump wins', '-6': '', '-4': '',
                         '-2': '', '2': '', '4': '',
                         '6': '', '8': 'Clinton wins'}
-
+    
     # Create color bar.
     color_bar_2020 = ColorBar(color_mapper=color_mapper_2020,
                               label_standoff=10,
