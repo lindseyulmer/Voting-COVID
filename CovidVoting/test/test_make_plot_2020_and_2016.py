@@ -3,35 +3,18 @@ This module contains a series of test cases to confirm the validity
 of the implementation of the make_plot_2020_and_2016.py module.
 Tests include smoke tests and edge tests.
 """
-import os
 import unittest
 import geopandas as gpd
 import pandas as pd
-from CovidVoting.add_data import (add_data)
 from CovidVoting.make_plot_2020_and_2016 import (make_plot)
 
-current_location = os.getcwd()
-os.chdir(current_location)
-# Define all states
-all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
-              "Pennsylvania", "Nebraska", "Washington",
-              "Alabama", "Arkansas", "New Mexico", "Texas",
-              "California", "Kentucky", "Georgia", "Wisconsin",
-              "Oregon", "Missouri", "Virginia", "Tennessee",
-              "Louisiana", "New York", "Michigan", "Idaho",
-              "Florida", "Illinois", "Montana", "Minnesota",
-              "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-              "Connecticut", "New Jersey", "District of Columbia",
-              "North Carolina", "Utah", "North Dakota", "South Carolina",
-              "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
-              "West Virginia", "Maine", "New Hampshire", "Arizona",
-              "Rhode Island"]
-# use add_data to create covid_election.csv
-# covid = pd.read_csv("data/covid_election.csv")
-add_data('data/basedata.csv', "data/use_election.csv", 'NAME',
-         "state", all_states, "data/covid_election.csv")
-df_covid_election = pd.read_csv("data/covid_election.csv")
-contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
+contiguous_usa = gpd.read_file("../../data/shapefiles/cb_2018_us_state_20m.shp")
+covid = pd.read_csv("../../data/raw_2_covid_latest.csv")
+df_election = pd.read_csv("../../data/use_election.csv")
+df_covid = covid.loc[covid["State/Territory"].
+                     isin(contiguous_usa["NAME"])]
+df_merge = pd.merge(left=df_covid, right=df_election,
+                    left_on='State/Territory', right_on='state')
 
 
 class UnitTests(unittest.TestCase):
@@ -44,7 +27,7 @@ class UnitTests(unittest.TestCase):
         This is a smoke test that proves our code works. With the given
         inputs, make_plot function should return a plot with tabs.
         """
-        plot = make_plot(df_covid_election, contiguous_usa)
+        plot = make_plot(df_merge, contiguous_usa)
         self.assertEqual(str(type(plot)), "<class 'bokeh.models.layouts.Tabs'>")
 
     def test_edge(self):
@@ -54,6 +37,7 @@ class UnitTests(unittest.TestCase):
         '''
         with self.assertRaises(TypeError):
             make_plot(1, contiguous_usa)
+
 
 if __name__ == '__main__':
     unittest.main()
