@@ -10,7 +10,7 @@ import pandas as pd
 import geopandas as gpd
 # Read the coviddata from a csv into a dataframe
 covid_data = pd.read_csv('data/raw_2_covid_latest.csv',
-                        index_col=0)
+                         index_col=0)
 # Read in shapefile and examine data
 contiguous_usa = gpd.read_file('data/shapefiles/cb_2018_us_state_20m.shp')
 # Merge shapefile with population data
@@ -23,25 +23,26 @@ case_states.to_csv('basedata.csv')
 case_states.head()
 # Define allstates
 all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
-             "Pennsylvania", "Nebraska", "Washington",
-             "Alabama", "Arkansas", "New Mexico", "Texas",
-             "California", "Kentucky", "Georgia", "Wisconsin",
-             "Oregon", "Missouri", "Virginia", "Tennessee",
-             "Louisiana", "New York", "Michigan", "Idaho",
-             "Florida", "Illinois", "Montana", "Minnesota",
-             "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-             "Connecticut", "New Jersey", "District of Columbia",
-             "North Carolina", "Utah", "North Dakota", "South Carolina",
-             "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
-             "West Virginia", "Maine", "New Hampshire", "Arizona",
-             "Rhode Island"]
+              "Pennsylvania", "Nebraska", "Washington",
+              "Alabama", "Arkansas", "New Mexico", "Texas",
+              "California", "Kentucky", "Georgia", "Wisconsin",
+              "Oregon", "Missouri", "Virginia", "Tennessee",
+              "Louisiana", "New York", "Michigan", "Idaho",
+              "Florida", "Illinois", "Montana", "Minnesota",
+              "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+              "Connecticut", "New Jersey", "District of Columbia",
+              "North Carolina", "Utah", "North Dakota", "South Carolina",
+              "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
+              "West Virginia", "Maine", "New Hampshire", "Arizona",
+              "Rhode Island"]
 # Define key states
 key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
 
+
 def add_data_csv(base_data, new_data, base_state_col, new_state_col,
-            use_state, how_join):
+                 use_state, how_join):
     """
     Args:
         base_data (str):filename with path of starting dataframe that
@@ -65,12 +66,13 @@ def add_data_csv(base_data, new_data, base_state_col, new_state_col,
 
     # Merge datasets
     merged_df = pd.merge(left=base_df, right=new_df, how=how_join,
-                        left_on=[base_state_col], right_on=[new_state_col])
+                         left_on=[base_state_col], right_on=[new_state_col])
     return merged_df
-    
+ 
 
-def add_data_shapefile(start_data, new_data_file, start_data_state, new_data_state,
-             states, new_file_name):
+def add_data_shapefile(start_data, new_data_file,
+                       start_data_state, new_data_state,
+                       states, new_file_name):
     """
     Args:
         start_data (str):filename with path of starting dataframe that
@@ -103,6 +105,6 @@ def add_data_shapefile(start_data, new_data_file, start_data_state, new_data_sta
     new_df = new_df.loc[~new_df[new_data_state].isin(drop_states)]
     # Merge datasets
     merged_data = base_data.merge(new_df, left_on=start_data_state,
-                                right_on=new_data_state)
+                                  right_on=new_data_state)
     # write out file
     merged_data.to_csv(new_file_name)
