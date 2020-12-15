@@ -6,8 +6,8 @@ from bokeh.embed import file_html
 from bokeh.models import Row, Column
 from bokeh.resources import CDN
 from bokeh.util.browser import view
-from add_data import (add_data)
 from jinja2 import Template
+from add_data import (add_data)
 from make_plot_2020_and_2016 import (make_plot)
 from make_plot_swingstate import (make_plot_map, make_plot_scatter,
                                   make_plot_bar, make_plot_time_series)
@@ -184,9 +184,9 @@ template = Template(
     </html>
     """)
 html = file_html(Column(Row(plot_1, plot_2),
-                 Row(plot_3, plot_4),
-                 Row(plot_5),
-                 Row(plot_6, plot_7)),
+                        Row(plot_3, plot_4),
+                        Row(plot_5),
+                        Row(plot_6, plot_7)),
                  template=template, resources=CDN)
 output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
