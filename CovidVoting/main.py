@@ -133,7 +133,8 @@ plot_4 = make_plot_scatter(source_df, category_list, color_col, color_palette,
 source_df = df_covid_election[["state", "percent_turnout_mail_2016",
                                "percent_turnout_mail_2020", "Total Cases",
                                "Total Deaths", 'win_2020',
-                               'win_2016']][df_covid_election["swing_state_2020"].notnull()]
+                               'win_2016']][df_covid_election
+                                            ["swing_state_2020"].notnull()]
 x_axis_list = key
 title = "the percentage of turnout by mail in 2016 and 2020 election"
 y1 = "percent_turnout_mail_2016"

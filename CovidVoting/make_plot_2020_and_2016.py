@@ -7,6 +7,7 @@ from bokeh.models.widgets import Panel, Tabs
 from bokeh.models import (ColorBar, GeoJSONDataSource,
                           HoverTool, LinearColorMapper)
 
+
 def make_plot(df_covid_election, contiguous_usa):
     '''
     This function makes maps to show 2020 or 2016 election results
@@ -42,7 +43,7 @@ def make_plot(df_covid_election, contiguous_usa):
     tick_labels_2016 = {'-8': 'Trump wins', '-6': '', '-4': '',
                         '-2': '', '2': '', '4': '',
                         '6': '', '8': 'Clinton wins'}
-    
+
     # Create color bar.
     color_bar_2020 = ColorBar(color_mapper=color_mapper_2020,
                               label_standoff=10,
