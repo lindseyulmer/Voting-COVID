@@ -1,5 +1,5 @@
 """This module has tests for add_data.py
-class Testadd_data(unittest.TestCase)
+class TestAddData(unittest.TestCase)
 test_oneshot(self)
 test_smoke(self)
 test_edge(self)
@@ -33,7 +33,7 @@ key = ["Arizona", "Florida", "Georgia", "Michigan",
 
 class TestAddData(unittest.TestCase):
     """
-    This class defines the tests for add_data.py.
+    This class defines the tests for add_data_shapefile
     """
     def test_smoke(self):
         """Smoke Tests
