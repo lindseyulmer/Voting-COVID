@@ -1,6 +1,8 @@
 """This module creates a base data set that add_data() build on.
-add_data(startdata,newdatafile,startdatastate, newdatastate, states,
-newfilename)
+add_data_csv(base_data, new_data, base_state_col, new_state_col,
+use_state, how_join)
+add_data_shapefile(start_data, new_data_file, start_data_state, new_data_state,
+states, new_file_name)
 The purpose of this module is to prepare data for visualization
 """
 # Import Packages
