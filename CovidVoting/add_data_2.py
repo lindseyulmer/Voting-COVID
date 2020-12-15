@@ -1,13 +1,14 @@
 """This module creates a base data set that add_data() build on.
-add_data(startdata,newdatafile,startdatastate, newdatastate, states,
-newfilename)
+add_data_new(base_data, new_data, base_state_col, new_state_col,
+use_state, how_join)
 The purpose of this module is to prepare data for visualization
 """
 # Import Packages
 import pandas as pd
 
+
 def add_data_new(base_data, new_data, base_state_col, new_state_col,
-            use_state, how_join):
+                 use_state, how_join):
     """
     Args:
         base_data (str):filename with path of starting dataframe that
@@ -31,5 +32,5 @@ def add_data_new(base_data, new_data, base_state_col, new_state_col,
 
     # Merge datasets
     merged_df = pd.merge(left=base_df, right=new_df, how=how_join,
-                        left_on=[base_state_col], right_on=[new_state_col])
+                         left_on=[base_state_col], right_on=[new_state_col])
     return merged_df
