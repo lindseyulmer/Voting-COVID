@@ -14,18 +14,18 @@ current_location = os.getcwd()
 os.chdir(current_location)
 # Define all states
 all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
-             "Pennsylvania", "Nebraska", "Washington",
-             "Alabama", "Arkansas", "New Mexico", "Texas",
-             "California", "Kentucky", "Georgia", "Wisconsin",
-             "Oregon", "Missouri", "Virginia", "Tennessee",
-             "Louisiana", "New York", "Michigan", "Idaho",
-             "Florida", "Illinois", "Montana", "Minnesota",
-             "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-             "Connecticut", "New Jersey", "District of Columbia",
-             "North Carolina", "Utah", "North Dakota", "South Carolina",
-             "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
-             "West Virginia", "Maine", "New Hampshire", "Arizona",
-             "Rhode Island"]
+              "Pennsylvania", "Nebraska", "Washington",
+              "Alabama", "Arkansas", "New Mexico", "Texas",
+              "California", "Kentucky", "Georgia", "Wisconsin",
+              "Oregon", "Missouri", "Virginia", "Tennessee",
+              "Louisiana", "New York", "Michigan", "Idaho",
+              "Florida", "Illinois", "Montana", "Minnesota",
+              "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+              "Connecticut", "New Jersey", "District of Columbia",
+              "North Carolina", "Utah", "North Dakota", "South Carolina",
+              "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
+              "West Virginia", "Maine", "New Hampshire", "Arizona",
+              "Rhode Island"]
 # use add_data to create covid_election.csv
 add_data('data/basedata.csv', "data/use_election.csv", 'NAME',
          "state", all_states, "data/covid_election.csv")
