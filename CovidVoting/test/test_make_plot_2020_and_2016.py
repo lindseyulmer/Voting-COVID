@@ -54,5 +54,5 @@ class UnitTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             make_plot(1, contiguous_usa)
 
-    if __name__ == '__main__':
+if __name__ == '__main__':
         unittest.main()

@@ -1,4 +1,7 @@
-"""the unit test code for the make_plot_swingstate module"""
+"""
+This module contains a series of test cases to confirm the validity
+of the implementation of the make_plot_swingstate.py module.
+"""
 # Importing libraries
 import unittest
 import sys
@@ -11,8 +14,7 @@ from CovidVoting.make_plot_swingstate import (make_plot_map,
                                               make_plot_bar,
                                               make_plot_time_series)
 sys.path.append("..")
-print(os.getcwd())
-
+#print(os.getcwd())
 
 # define swing states
 swing_states = ["Arizona", "Colorado", "Florida",
@@ -63,15 +65,23 @@ df_covid_daily_swing = pd.merge(left=df_covid_daily_swing,
 class UnitTestsMakePlotSwing(unittest.TestCase):
     """the class is for unit test of the making plot module"""
     def test_make_map(self):
+        """
+        This is a test that proves our code works. With the given
+        inputs, make_plot_map function should return a bokeh plot.
+        """
         hover_list = [('State', '@NAME')]
-        p = make_plot_map(df_covid_election,
+        plot = make_plot_map(df_covid_election,
                           contiguous_usa, 'swing_state_2020',
                           'color_2020', hover_list,
                           '2020 Election Result of Swing States')
-        self.assertEqual(str(type(p)),
+        self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
     def test_make_scatter(self):
+        """
+        This is a test that proves our code works. With the given
+        inputs, make_plot_scatter function should return a bokeh plot.
+        """
         category_list = ['Democratic', 'Republican']
         source_df = df_covid_election[
           df_covid_election['state'].isin(swing_states)]
@@ -86,34 +96,41 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         subtitle = "colors from 2020 election results"
         x_label = 'the number of total cases'
         y_label = 'the number of total deaths'
-        p = make_plot_scatter(source_df, category_list,
+        plot = make_plot_scatter(source_df, category_list,
                               color_col, color_palette,
                               x_col, y_col, hover_list, x_label,
                               y_label, title, subtitle)
-        self.assertEqual(str(type(p)),
+        self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
     def test_make_bar(self):
+        """
+        This is a test that proves our code works. With the given
+        inputs, make_plot_bar function should return a bokeh plot.
+        """
         source_df = df_covid_election[["state", "percent_turnout_mail_2016",
                                        "percent_turnout_mail_2020",
                                        "Total Cases",
                                        "Total Deaths", 'win_2020', 'win_2016']]
-        [df_covid_election["swing_state_2020"].notnull()]
         x_axis_list = swing_states
         title = "the percentage of turnout by mail in 2016 and 2020 election"
-        y1 = "percent_turnout_mail_2016"
-        y2 = "percent_turnout_mail_2020"
+        y_1 = "percent_turnout_mail_2016"
+        y_2 = "percent_turnout_mail_2020"
         y1_label = "2016"
         y2_label = "2020"
         hover_list = [("win", "@$name"),
                       ('Total Cases', '@{Total Cases}'),
                       ('Total Deaths', '@{Total Deaths}')]
-        p = make_plot_bar(source_df, x_axis_list,
-                          title, y1, y2, y1_label, y2_label, hover_list)
-        self.assertEqual(str(type(p)),
+        plot = make_plot_bar(source_df, x_axis_list,
+                          title, y_1, y_2, y1_label, y2_label, hover_list)
+        self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
     def test_make_line(self):
+        """
+        This is a test that proves our code works. With the given
+        inputs, make_plot_time_series function should return a bokeh plot.
+        """
         source_df = df_covid_daily_swing
         group_col = 'win_2020'
         use_col = 'tot_cases'
@@ -121,47 +138,10 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         title = 'total cumulative cases for states each party won in 2020'
         hover_list = [('Date', '@date{%F}'),
                       ('Total Cases (thousands)', '@{tot_cases}{int}')]
-        p = make_plot_time_series(source_df, group_col,
+        plot = make_plot_time_series(source_df, group_col,
                                   use_col, y_label, title, hover_list)
-        self.assertEqual(str(type(p)),
+        self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
-
-
-'''
-    def test_html(self):
-
-
-
-    def test_smoke(self):
-        """smoke test"""
-        n_neighbors = 3
-        data = np.array([[0,0,5],[2,2,2], [8,9,10], [15,20,1]])
-        query = np.array([6,1])
-        self.assertIsNotNone(knn_regression(n_neighbors, data, query))
-
-    def test_oneshot_1(self):
-        """oneshot test"""
-        n_neighbors = 5
-        data = np.array([[2,3,1,5], [8,10,2,3],
-        [1,3,2,14],[2,9,3,100], [9,5,10,20], [6,7,8,50]])
-
-    def test_edge_01(self):
-        """type error - n_neighbors"""
-        n_neighbors = "2"
-        data = np.array([[0,0,5],[2,2,2]])
-        query = np.array([1,1])
-        self.assertRaisesRegex(TypeError,
-        "Only integers are allowed in variable \"n_neighbors\".",
-                               knn_regression, n_neighbors, data, query)
-                               query = np.array([3,7,9])
-        self.assertEqual(knn_regression(n_neighbors, data, query), 37.8)
-
-'''
 
 if __name__ == '__main__':
     unittest.main()
-'''
-    suite = unittest.TestLoader().loadTestsFromTestCase(UnitTestsMakePlot)
-    runner = unittest.TextTestRunner(verbosity=2)
-    runner.run(suite)
-'''
