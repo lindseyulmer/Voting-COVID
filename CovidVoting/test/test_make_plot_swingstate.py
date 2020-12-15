@@ -5,7 +5,6 @@ of the implementation of the make_plot_swingstate.py module.
 # Importing libraries
 import unittest
 import sys
-import os
 import pandas as pd
 import numpy as np
 import geopandas as gpd
@@ -14,7 +13,6 @@ from CovidVoting.make_plot_swingstate import (make_plot_map,
                                               make_plot_bar,
                                               make_plot_time_series)
 sys.path.append("..")
-#print(os.getcwd())
 
 # define swing states
 swing_states = ["Arizona", "Colorado", "Florida",
@@ -71,9 +69,9 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         """
         hover_list = [('State', '@NAME')]
         plot = make_plot_map(df_covid_election,
-                          contiguous_usa, 'swing_state_2020',
-                          'color_2020', hover_list,
-                          '2020 Election Result of Swing States')
+                             contiguous_usa, 'swing_state_2020',
+                             'color_2020', hover_list,
+                             '2020 Election Result of Swing States')
         self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
@@ -97,9 +95,9 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         x_label = 'the number of total cases'
         y_label = 'the number of total deaths'
         plot = make_plot_scatter(source_df, category_list,
-                              color_col, color_palette,
-                              x_col, y_col, hover_list, x_label,
-                              y_label, title, subtitle)
+                                 color_col, color_palette,
+                                 x_col, y_col, hover_list, x_label,
+                                 y_label, title, subtitle)
         self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
@@ -122,7 +120,7 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
                       ('Total Cases', '@{Total Cases}'),
                       ('Total Deaths', '@{Total Deaths}')]
         plot = make_plot_bar(source_df, x_axis_list,
-                          title, y_1, y_2, y1_label, y2_label, hover_list)
+                             title, y_1, y_2, y1_label, y2_label, hover_list)
         self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
@@ -139,9 +137,10 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         hover_list = [('Date', '@date{%F}'),
                       ('Total Cases (thousands)', '@{tot_cases}{int}')]
         plot = make_plot_time_series(source_df, group_col,
-                                  use_col, y_label, title, hover_list)
+                                     use_col, y_label, title, hover_list)
         self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
+        
 if __name__ == '__main__':
     unittest.main()
