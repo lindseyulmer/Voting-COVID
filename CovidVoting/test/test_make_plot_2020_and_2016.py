@@ -13,7 +13,7 @@ from CovidVoting.make_plot_2020_and_2016 import (make_plot)
 current_location = os.getcwd()
 os.chdir(current_location)
 # Define all states
-allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
+all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
              "Pennsylvania", "Nebraska", "Washington",
              "Alabama", "Arkansas", "New Mexico", "Texas",
              "California", "Kentucky", "Georgia", "Wisconsin",
@@ -28,7 +28,7 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
              "Rhode Island"]
 # use add_data to create covid_election.csv
 add_data('data/basedata.csv', "data/use_election.csv", 'NAME',
-         "state", allstates, "data/covid_election.csv")
+         "state", all_states, "data/covid_election.csv")
 covid = pd.read_csv("data/covid_election.csv")
 contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
 
