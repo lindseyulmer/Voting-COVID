@@ -1,6 +1,8 @@
+'''
 # Importing libraries
 import os
 import pandas as pd
+import numpy as np
 import geopandas as gpd
 from bokeh.embed import file_html
 from bokeh.models import Row, Column
@@ -33,10 +35,16 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
 key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
+
+swing_states = ["Arizona", "Colorado", "Florida",
+                "Georgia", "Iowa", "Michigan",
+                "Minnesota", "Nevada", "New Hampshire",
+                "North Carolina", "Ohio",
+                "Pennsylvania", "Texas", "Wisconsin"]
 # print(current_location)
 # Read files
 contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
-"""
+
 df_covid = pd.read_csv("data/raw_2_covid_latest.csv")
 df_covid_daily = pd.read_csv("data/raw_1_covid_daily.csv")
 df_election = pd.read_csv("data/use_election.csv")
@@ -83,8 +91,10 @@ add_data('data/basedata.csv', "data/raw_1_covid_daily.csv", "NAME",
 # read add_data results as a csv
 df_covid_election = pd.read_csv("data/covid_election.csv")
 df_covid_daily_swing = pd.read_csv("data/covid_daily_swing.csv")
+"""
 # all states plot for 2016 and 2020 election
 plot_0 = make_plot(df_covid_election, contiguous_usa)
+
 # map 1
 hover_list = [('State', '@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
@@ -95,6 +105,7 @@ hover_list = [('State', '@NAME')]
 plot_2 = make_plot_map(df_covid_election, contiguous_usa,
                        'swing_state_2016', 'color_2016', hover_list,
                        '2016 Election Result of Swing States')
+                       
 # scatter plot 1
 category_list = ['Democratic', 'Republican']
 source_df = df_covid_election[df_covid_election['state'].isin(key)]
@@ -192,8 +203,10 @@ output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
     f.write(html)
 view(output_file)
+
 html2 = file_html(plot_0, CDN, "plot all states")
 output_file2 = './example/plot_all_states.html'
 with open(output_file2, 'w') as f:
     f.write(html2)
 view(output_file2)
+'''

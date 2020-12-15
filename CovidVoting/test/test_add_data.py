@@ -8,7 +8,8 @@ import unittest
 import sys
 import os
 import pandas as pd
-from CovidVoting.add_data import (add_data)
+from CovidVoting.add_data import (add_data_csv,
+                                  add_data_shapefile)
 #print(os.getcwd())
 sys.path.append('..')
 
@@ -44,10 +45,10 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
-        add_data('data/coviddataand2020Election.csv',
-                 'data/raw_7_keystates_covid_voting_issue_poll.csv',
-                 'NAME', 'States', key,
-                 "CovidVoting/test/keystates_covid_2020voting_poll.csv")
+        add_data_shapefile('data/coviddataand2020Election.csv',
+                          'data/raw_7_keystates_covid_voting_issue_poll.csv',
+                          'NAME', 'States', key,
+                          "CovidVoting/test/keystates_covid_2020voting_poll.csv")
 
     def test_oneshot(self):
         """One shot tests
@@ -74,8 +75,8 @@ class TestAddData(unittest.TestCase):
             False: Test failed
         """
         with self.assertRaises(KeyError):
-            add_data('data/basedata.csv', 'data/raw_3_2020election.csv',
-                     "wrongname", "States", allstates, "testresults.csv")
+            add_data_shapefile('data/basedata.csv', 'data/raw_3_2020election.csv',
+                               "wrongname", "States", allstates, "testresults.csv")
 
 
 if __name__ == '__main__':
