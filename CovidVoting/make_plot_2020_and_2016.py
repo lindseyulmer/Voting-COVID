@@ -11,9 +11,9 @@ from bokeh.models import (ColorBar, GeoJSONDataSource,
 
 def make_plot(df_covid_election, contiguous_usa):
     '''
-    This function makes maps to show 2020 or 2016 election results
-    and Covid data together. Users can choose to see which year's election
-    result they want to see by clicking on the tabs provided.
+    This function makes maps of all states to show 2020 or 2016 election
+    results and Covid data together. Users can choose to see which year's
+    election result they want to see by clicking on the tabs provided.
 
     Args:
     - df_covid_election: (csv) Covid and election data in a csv file
