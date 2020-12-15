@@ -1,6 +1,7 @@
 """
 In this module, the function make_plot uses the package Bokeh to help creating
 interactive plots to show voting and Covid data.
+make_plot(df_covid_election, contiguous_usa)
 """
 from bokeh.plotting import figure
 from bokeh.models.widgets import Panel, Tabs
