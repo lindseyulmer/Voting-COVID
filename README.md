@@ -27,19 +27,19 @@ We can use functions in `make_plot_swings.py` to build a map to view the electio
 #### Example of using our module
 We have the example codes of using our module in `main.py`. You can find the results in the directory `example`.
 ## Function Summary
-### add_data_csv(base_data, new_data, base_state_col, new_state_col, use_state, how_join)
+#### add_data_csv(base_data, new_data, base_state_col, new_state_col, use_state, how_join)
     -Does not process statefiles. Use this to add additional data at state level.
-### add_data_shapefile(start_data, new_data_file, start_data_state, new_data_state, states, new_file_name)
+#### add_data_shapefile(start_data, new_data_file, start_data_state, new_data_state, states, new_file_name)
     -Does process statefiles. Use this to add additional locations and data.
-### make_plot(df_covid_election, contiguous_usa)
+#### make_plot(df_covid_election, contiguous_usa)
     -Make state level maps for all states
-### make_plot_map(source_df, shapefile, field, range_col, hover_list, title)
+#### make_plot_map(source_df, shapefile, field, range_col, hover_list, title)
     -Make state level maps for swing states
-### make_plot_scatter(source_df, category_list, color_col, color_palette, x_col, y_col, hover_list, x_label, y_label, title, subtitle)
+#### make_plot_scatter(source_df, category_list, color_col, color_palette, x_col, y_col, hover_list, x_label, y_label, title, subtitle)
     -Make scatter plots for swing state data
-### make_plot_bar(source_df, x_axis_list, title, y_1, y_2, y1_label, y2_label, hover_list)
+#### make_plot_bar(source_df, x_axis_list, title, y_1, y_2, y1_label, y2_label, hover_list)
    -Make bar charts for swing state data
-### make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
+#### make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
 -Make time series plot the examples in main.py is for just swing states, but it could be used for all states as well
 ## Directory Structure
 ```bash  
