@@ -57,22 +57,22 @@ def add_data(start_data, new_data_file, start_data_state, new_data_state,
     Returns:
         newfilename: the dataframe with the newly added data as a csv"""
     # Read the dataframe to add too
-    basedata = pd.read_csv(startdata, index_col=0)
+    basedata = pd.read_csv(start_data, index_col=0)
     # Read data being added as a dataframe
-    newdf = pd.read_csv(newdatafile)
+    newdf = pd.read_csv(new_data_file)
     # Find all non-desired states
     dropstates = []
-    for eachstate in basedata[startdatastate]:
+    for eachstate in basedata[start_data_state]:
         if eachstate not in states:
             dropstates.append(eachstate)
-    for eachstate in newdf[newdatastate]:
+    for eachstate in newdf[new_data_state]:
         if eachstate not in states:
             dropstates.append(eachstate)
     # Drop nondesired states
-    basedata = basedata.loc[~basedata[startdatastate].isin(dropstates)]
-    newdf = newdf.loc[~newdf[newdatastate].isin(dropstates)]
+    basedata = basedata.loc[~basedata[start_data_state].isin(dropstates)]
+    newdf = newdf.loc[~newdf[new_data_state].isin(dropstates)]
     # Merge datasets
-    mergeddata = basedata.merge(newdf, left_on=startdatastate,
-                                right_on=newdatastate)
+    mergeddata = basedata.merge(newdf, left_on=start_data_state,
+                                right_on=new_data_state)
     # write out file
     mergeddata.to_csv(newfilename)
