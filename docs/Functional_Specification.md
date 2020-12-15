@@ -23,11 +23,11 @@
 The user can be anyone who is interested in visualizing covid and election data. This can be anyone from people who work in public policy to just citizens who are interested in the election or covid data. They do not need experience any experience to interact with pre-generated figures but would need some familiarity with python and jupyter notebooks to add new data and create new figures. For example, a user can be a US citizen who is concerned about the COVID and election. She once used python before but doesn’t know how to make plots. Also a user can be a news reporter. He wants to help people got the right information. He may have some other state-level data. A users can just be a person who is interested in the Covid and Us voting. He can view our visualized results.
 
 ## Use Cases
-### Use Case 1: Adding Additional Data to Our Base Data
+#### Use Case 1: Adding Additional Data to Our Base Data
 If the user had additional data they wanted in an interactive map, they could upload more data, and alter what columns in the combined data frame are plotted to include their newly added data. Users doing this should have some experience with python.
-### Use Case 2: Creating Maps for All States
+#### Use Case 2: Creating Maps for All States
 Users will run a python file as is to generate the desired interactive map figure for all states.
-### Use Case 3: Creating Figures for Only Swing States
+#### Use Case 3: Creating Figures for Only Swing States
 If a user was only interested in the data of swing states. He can use our functions to generate the desired interactive plots for the swing states.
-### Use Case 4: Viewing preloaded plots
+#### Use Case 4: Viewing preloaded plots
 If a user is interested in our visualized results, he can view our example plots, and does not need any coding experience.
