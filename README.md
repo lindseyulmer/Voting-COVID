@@ -29,7 +29,9 @@ We have the example codes of using our module in `main.py`. You can find the res
 ## Function Summary
 add_data_csv(base_data, new_data, base_state_col, new_state_col,
 use_state, how_join)
+
  Does not process statefiles. Use this to add additional data at state level.
+ 
 add_data_shapefile(start_data, new_data_file, start_data_state, new_data_state,
 states, new_file_name)
   Does process statefiles. Use this to add additional locations and data.
