@@ -34,6 +34,7 @@ key = ["Arizona", "Florida", "Georgia", "Michigan",
 class TestAddData(unittest.TestCase):
     """
     This class defines the tests for add_data_shapefile
+    and add_data_csv
     """
     def test_smoke(self):
         """Smoke Tests
@@ -47,6 +48,8 @@ class TestAddData(unittest.TestCase):
                            'data/raw_7_keystates_covid_voting_issue_poll.csv',
                            'NAME', 'States', key,
                            "CovidVoting/test/keystates_covid_2020voting_poll.csv")
+        add_data_csv('data/basedata.csv', 'data/raw_3_2020election.csv', "NAME", "States,
+                     allstates, "left")
 
     def test_oneshot(self):
         """One shot tests
