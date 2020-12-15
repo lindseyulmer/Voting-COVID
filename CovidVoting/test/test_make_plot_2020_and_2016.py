@@ -8,9 +8,9 @@ import geopandas as gpd
 import pandas as pd
 from CovidVoting.make_plot_2020_and_2016 import (make_plot)
 
-contiguous_usa = gpd.read_file("../../data/shapefiles/cb_2018_us_state_20m.shp")
-covid = pd.read_csv("../../data/raw_2_covid_latest.csv")
-df_election = pd.read_csv("../../data/use_election.csv")
+contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
+covid = pd.read_csv("data/raw_2_covid_latest.csv")
+df_election = pd.read_csv("data/use_election.csv")
 df_covid = covid.loc[covid["State/Territory"].
                      isin(contiguous_usa["NAME"])]
 df_merge = pd.merge(left=df_covid, right=df_election,
