@@ -24,6 +24,8 @@ def make_plot(df_covid_election, contiguous_usa):
     # Merge shapefile with covid data
     map_info = contiguous_usa.merge(df_covid_election,
                                     left_on="NAME", right_on="state")
+    # Drop Alaska and Hawaii
+    map_info = map_info.loc[~map_info['NAME'].isin(['Alaska', 'Hawaii'])]
     # Input GeoJSON source that contains features for plotting
     geosource = GeoJSONDataSource(geojson=map_info.to_json())
     base_colors = ["#cb181d", "#fb6a4a", "#fcae91",
