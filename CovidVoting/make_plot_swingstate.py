@@ -1,6 +1,8 @@
 '''
-In this module, the below functions use the package Bokeh, and geopandas to help users create
-interactive plots to provide more information of voting and COVID in the swing states.
+In this module, the below functions use the package Bokeh,
+and geopandas to help users create
+interactive plots to provide more information
+of voting and COVID in the swing states.
 make_plot_map(source_df, shapefile, field, range_col, hover_list, title)
 make_plot_scatter(source_df, category_list, color_col, color_palette,
  x_col, y_col, hover_list, x_label, y_label, title, subtitle)
@@ -31,9 +33,12 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
     Args:
     - source_df: (pandas.dataframe) the data used to make a plot
     - shapefile: (shp) shape data of the U.S. to make a map
-    - field: (a column of source_df contains integers) the variable used to fill colors
-    - range_col: (a column of source_df contains integers) the variable used to map numbers
-                 in a range into a sequence of colors (the condition of results)
+    - field: (a column of source_df contains integers)
+              the variable used to fill colors
+    - range_col: (a column of source_df contains integers)
+                 the variable used to map numbers
+                 in a range into a sequence of colors
+                 (the condition of results)
     - hover_list: (list) a list of tuples shown in the hover
     - title: (string) the title of the plot
 
@@ -76,9 +81,9 @@ def make_plot_map(source_df, shapefile, field, range_col, hover_list, title):
 
     # Create figure object
     plot = figure(title=title,
-               plot_height=400,
-               plot_width=600,
-               toolbar_location=None)
+                  plot_height=400,
+                  plot_width=600,
+                  toolbar_location=None)
     plot.xgrid.grid_line_color = None
     plot.ygrid.grid_line_color = None
 
@@ -130,10 +135,10 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
 
     plot = figure(plot_height=400, toolbar_location=None)
     plot.scatter(x=x_col, y=y_col,
-              source=source_df,
-              color=factor_cmap(color_col,
+                 source=source_df,
+                 color=factor_cmap(color_col,
                                 palette=color_palette, factors=category_list),
-              size=10, legend=color_col)
+                 size=10, legend=color_col)
 
     plot.title.text = title
     plot.xaxis.axis_label = x_label
@@ -156,6 +161,7 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     plot.add_layout(sub_text, 'below')
 
     return plot
+
 
 def make_plot_bar(source_df, x_axis_list, title, y_1,
                   y_2, y1_label, y2_label, hover_list):
@@ -180,16 +186,16 @@ def make_plot_bar(source_df, x_axis_list, title, y_1,
     source = ColumnDataSource(data=source_df)
 
     plot = figure(x_range=x_axis_list, y_range=(0, 1),
-               plot_height=400, plot_width=1200, title=title,
-               toolbar_location=None, tools="hover", tooltips=hover_list)
+                  plot_height=400, plot_width=1200, title=title,
+                  toolbar_location=None, tools="hover", tooltips=hover_list)
 
     plot.vbar(x=dodge("state", -0.15, range=plot.x_range),
-           top=y_1, width=0.2, source=source,
-           color="#CAAD8D", legend_label=y1_label, name='win_2016')
+              top=y_1, width=0.2, source=source,
+              color="#CAAD8D", legend_label=y1_label, name='win_2016')
 
     plot.vbar(x=dodge("state",  0.15,  range=plot.x_range),
-           top=y_2, width=0.2, source=source,
-           color="#F4D03F", legend_label=y2_label, name='win_2020')
+              top=y_2, width=0.2, source=source,
+              color="#F4D03F", legend_label=y2_label, name='win_2020')
 
     hover = HoverTool()
     hover.tooltips = hover_list
