@@ -39,21 +39,21 @@ key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Pennsylvania", "Texas", "Wisconsin"]
 
 
-def add_data(startdata, newdatafile, startdatastate, newdatastate,
-             states, newfilename):
+def add_data(start_data, new_data_file, start_data_state, new_data_state,
+             states, new_file_name):
     """
     Args:
-        startdata (str):filename with path of starting dataframe that
+        start_data (str):filename with path of starting dataframe that
         includes geopandas
         shape information, recommended use basedata.csv from github repo
-        newdatafile (str): filename with path to csv of new data to be added
-        startdatastate(str): name of state column of starting data
-        newdatastate(str): name of state column of new data
+        new_data_file (str): filename with path to csv of new data to be added
+        start_data_state(str): name of state column of starting data
+        new_data_state(str): name of state column of new data
         column (str): column from new data file to be added,
         only add one at a time,
         rerun function to add more than one colummn
         states(list): list of strings of the desired states
-        newfilename(str):name of new data file generated
+        new_file_name(str):name of new data file generated
     Returns:
         newfilename: the dataframe with the newly added data as a csv"""
     # Read the dataframe to add too
