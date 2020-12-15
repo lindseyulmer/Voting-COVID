@@ -75,4 +75,4 @@ def add_data(start_data, new_data_file, start_data_state, new_data_state,
     mergeddata = basedata.merge(newdf, left_on=start_data_state,
                                 right_on=new_data_state)
     # write out file
-    mergeddata.to_csv(newfilename)
+    mergeddata.to_csv(new_file_name)
