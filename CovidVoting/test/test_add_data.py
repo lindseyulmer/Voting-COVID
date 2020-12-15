@@ -9,9 +9,9 @@ import sys
 import os
 import pandas as pd
 from CovidVoting.add_data import (add_data)
-print(os.getcwd())
+#print(os.getcwd())
 sys.path.append('..')
-# Define all states
+
 # Define all states
 allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
              "Pennsylvania", "Nebraska", "Washington",

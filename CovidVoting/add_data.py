@@ -7,12 +7,12 @@ The purpose of this module is to prepare data for visualization
 import pandas as pd
 import geopandas as gpd
 # Read the coviddata from a csv into a dataframe
-coviddata = pd.read_csv('data/raw_2_covid_latest.csv',
+covid_data = pd.read_csv('data/raw_2_covid_latest.csv',
                         index_col=0)
 # Read in shapefile and examine data
 contiguous_usa = gpd.read_file('data/shapefiles/cb_2018_us_state_20m.shp')
 # Merge shapefile with population data
-case_states = contiguous_usa.merge(coviddata, left_on='NAME',
+case_states = contiguous_usa.merge(covid_data, left_on='NAME',
                                    right_on='State/Territory')
 # Drop Alaska and Hawaii
 case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', "Hawaii",
@@ -20,7 +20,7 @@ case_states = case_states.loc[~case_states['NAME'].isin(['Alaska', "Hawaii",
 case_states.to_csv('basedata.csv')
 case_states.head()
 # Define allstates
-allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
+all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
              "Pennsylvania", "Nebraska", "Washington",
              "Alabama", "Arkansas", "New Mexico", "Texas",
              "California", "Kentucky", "Georgia", "Wisconsin",
@@ -57,22 +57,22 @@ def add_data(start_data, new_data_file, start_data_state, new_data_state,
     Returns:
         newfilename: the dataframe with the newly added data as a csv"""
     # Read the dataframe to add too
-    basedata = pd.read_csv(start_data, index_col=0)
+    base_data = pd.read_csv(start_data, index_col=0)
     # Read data being added as a dataframe
-    newdf = pd.read_csv(new_data_file)
+    new_df = pd.read_csv(new_data_file)
     # Find all non-desired states
-    dropstates = []
-    for eachstate in basedata[start_data_state]:
-        if eachstate not in states:
-            dropstates.append(eachstate)
-    for eachstate in newdf[new_data_state]:
-        if eachstate not in states:
-            dropstates.append(eachstate)
+    drop_states = []
+    for each_state in base_data[start_data_state]:
+        if each_state not in states:
+            drop_states.append(each_state)
+    for each_state in new_df[new_data_state]:
+        if each_state not in states:
+            drop_states.append(each_state)
     # Drop nondesired states
-    basedata = basedata.loc[~basedata[start_data_state].isin(dropstates)]
-    newdf = newdf.loc[~newdf[new_data_state].isin(dropstates)]
+    base_data = base_data.loc[~base_data[start_data_state].isin(drop_states)]
+    new_df = new_df.loc[~new_df[new_data_state].isin(drop_states)]
     # Merge datasets
-    mergeddata = basedata.merge(newdf, left_on=start_data_state,
+    merged_data = base_data.merge(new_df, left_on=start_data_state,
                                 right_on=new_data_state)
     # write out file
-    mergeddata.to_csv(newfilename)
+    merged_data.to_csv(new_file_name)

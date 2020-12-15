@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='CovidVoting',
-        version='__version__ 1.0',
+        version='1.0',
         description='This is the setup for CovidVoting Module',
         author='Chiaoya Chang, Yanyan Guan. Lindsey Ulmer',
         author_email='chiaoya@uw.edu',

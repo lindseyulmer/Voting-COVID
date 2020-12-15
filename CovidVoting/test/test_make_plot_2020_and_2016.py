@@ -27,9 +27,10 @@ all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
               "West Virginia", "Maine", "New Hampshire", "Arizona",
               "Rhode Island"]
 # use add_data to create covid_election.csv
+# covid = pd.read_csv("data/covid_election.csv")
 add_data('data/basedata.csv', "data/use_election.csv", 'NAME',
          "state", all_states, "data/covid_election.csv")
-covid = pd.read_csv("data/covid_election.csv")
+df_covid_election = pd.read_csv("data/covid_election.csv")
 contiguous_usa = gpd.read_file("data/shapefiles/cb_2018_us_state_20m.shp")
 
 
@@ -43,8 +44,8 @@ class UnitTests(unittest.TestCase):
         This is a smoke test that proves our code works. With the given
         inputs, make_plot function should return a plot with tabs.
         """
-        p = make_plot(covid, contiguous_usa)
-        self.assertEqual(str(type(p)), "<class 'bokeh.models.layouts.Tabs'>")
+        plot = make_plot(df_covid_election, contiguous_usa)
+        self.assertEqual(str(type(plot)), "<class 'bokeh.models.layouts.Tabs'>")
 
     def test_edge(self):
         '''
@@ -55,4 +56,4 @@ class UnitTests(unittest.TestCase):
             make_plot(1, contiguous_usa)
 
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()
