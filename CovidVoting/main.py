@@ -1,6 +1,5 @@
 # Importing libraries
-from make_plot_swingstate import (make_plot_map, make_plot_scatter,
-                                  make_plot_bar, make_plot_time_series)
+import os
 import pandas as pd
 import geopandas as gpd
 from bokeh.embed import file_html
@@ -9,7 +8,9 @@ from bokeh.resources import CDN
 from bokeh.util.browser import view
 from add_data import (add_data)
 from jinja2 import Template
-import os
+from make_plot_2020_and_2016 import (make_plot)
+from make_plot_swingstate import (make_plot_map, make_plot_scatter,
+                                  make_plot_bar, make_plot_time_series)
 current_location = os.getcwd()
 os.chdir(current_location)
 
@@ -82,6 +83,8 @@ add_data('data/basedata.csv', "data/raw_1_covid_daily.csv", "NAME",
 # read add_data results as a csv
 df_covid_election = pd.read_csv("data/covid_election.csv")
 df_covid_daily_swing = pd.read_csv("data/covid_daily_swing.csv")
+# all states plot for 2016 and 2020 election
+plot_0 = make_plot(df_covid_election, contiguous_usa)
 # map 1
 hover_list = [('State', '@NAME')]
 plot_1 = make_plot_map(df_covid_election, contiguous_usa,
@@ -162,7 +165,6 @@ hover_list = [('Date', '@date{%F}'),
               ('Total Cases (thousands)', '@{tot_cases}{int}')]
 plot_7 = make_plot_time_series(source_df, group_col, use_col, y_label,
                                title, hover_list)
-
 # show in the html file
 template = Template(
     """
@@ -180,15 +182,17 @@ template = Template(
         </body>
     </html>
     """)
-
-
 html = file_html(Column(Row(plot_1, plot_2),
                  Row(plot_3, plot_4),
                  Row(plot_5),
                  Row(plot_6, plot_7)),
                  template=template, resources=CDN)
-
 output_file = './example/plot_swingstate.html'
 with open(output_file, 'w') as f:
     f.write(html)
 view(output_file)
+html2 = file_html(plot_0, CDN, "plot all states")
+output_file2 = './example/plot_all_states.html'
+with open(output_file2, 'w') as f:
+    f.write(html2)
+view(output_file2)
