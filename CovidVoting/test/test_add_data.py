@@ -48,7 +48,7 @@ class TestAddData(unittest.TestCase):
                            'data/raw_7_keystates_covid_voting_issue_poll.csv',
                            'NAME', 'States', key,
                            "CovidVoting/test/keystates_covid_2020voting_poll.csv")
-        add_data_csv('data/basedata.csv', 'data/raw_3_2020election.csv', "NAME", "States,
+        add_data_csv('data/basedata.csv', 'data/raw_3_2020election.csv', "NAME", "States",
                      allstates, "left")
 
     def test_oneshot(self):
