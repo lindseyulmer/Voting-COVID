@@ -3,12 +3,11 @@ In this module, the below functions use the package Bokeh, and geopandas to help
 interactive plots to provide more information of voting and COVID in the swing states.
 make_plot_map(source_df, shapefile, field, range_col, hover_list, title)
 make_plot_scatter(source_df, category_list, color_col, color_palette,
-                  x_col, y_col, hover_list,
-                  x_label, y_label, title, subtitle)
+ x_col, y_col, hover_list, x_label, y_label, title, subtitle)
 make_plot_bar(source_df, x_axis_list, title, y_1,
-              y_2, y1_label, y2_label, hover_list)
+y_2, y1_label, y2_label, hover_list)
 make_plot_time_series(source_df, group_col, use_col,
-                      y_label, title, hover_list)
+y_label, title, hover_list)
 '''
 
 # Importing libraries
@@ -163,6 +162,7 @@ def make_plot_bar(source_df, x_axis_list, title, y_1,
     '''
     This function provide a bar chart to compare the
     percentage of turnout by mail in 2016 and 2020 election
+    in key swing states
 
     Args:
     - source_df: (pandas.dataframe) the data used to make a plot
@@ -214,6 +214,8 @@ def make_plot_time_series(source_df, group_col, use_col,
     '''
     This function provide a time series chart to show the total
     cumulative cases for states where each party won in the election.
+    This could be used for swing states or all states, depending
+    on which are present in the source_df.
 
     Args:
     - source_df: (pandas.dataframe) the data used to make a plot
