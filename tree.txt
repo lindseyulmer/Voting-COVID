@@ -77,3 +77,80 @@
 └── tree.txt
 
 9 directories, 68 files
+.
+├── CovidVoting
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-37.pyc
+│   │   ├── add_data.cpython-37.pyc
+│   │   ├── make_plot_2020_and_2016.cpython-37.pyc
+│   │   └── make_plot_swingstate.cpython-37.pyc
+│   ├── add_data.py
+│   ├── make_plot_2020_and_2016.py
+│   ├── make_plot_swingstate.py
+│   └── test
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-37.pyc
+│       │   ├── test_add_data.cpython-37.pyc
+│       │   ├── test_make_plot_2020_and_2016.cpython-37.pyc
+│       │   └── test_make_plot_swingstate.cpython-37.pyc
+│       ├── keystates_covid_2020voting_poll.csv
+│       ├── test_add_data.py
+│       ├── test_make_plot_2020_and_2016.py
+│       └── test_make_plot_swingstate.py
+├── LICENSE.md
+├── README.md
+├── __init__.py
+├── basedata.csv
+├── data
+│   ├── basedata.csv
+│   ├── covid_daily_swing.csv
+│   ├── covid_election.csv
+│   ├── coviddataand2020Election.csv
+│   ├── data_formatting.ipynb
+│   ├── keystates_covid_2020voting_poll.csv
+│   ├── raw_0_states.csv
+│   ├── raw_1_covid_daily.csv
+│   ├── raw_2_covid_latest.csv
+│   ├── raw_3_2020election.csv
+│   ├── raw_5_2016election.csv
+│   ├── raw_6_1_2016mail.csv
+│   ├── raw_6_2016mail.csv
+│   ├── raw_7_keystates_covid_voting_issue_poll.csv
+│   ├── raw_8_2020_votebymail.csv
+│   ├── shapefiles
+│   │   ├── cb_2018_us_nation_20m.cpg
+│   │   ├── cb_2018_us_nation_20m.dbf
+│   │   ├── cb_2018_us_nation_20m.prj
+│   │   ├── cb_2018_us_nation_20m.shp
+│   │   ├── cb_2018_us_nation_20m.shp.ea.iso.xml
+│   │   ├── cb_2018_us_nation_20m.shp.iso.xml
+│   │   ├── cb_2018_us_nation_20m.shx
+│   │   ├── cb_2018_us_state_20m.cpg
+│   │   ├── cb_2018_us_state_20m.dbf
+│   │   ├── cb_2018_us_state_20m.prj
+│   │   ├── cb_2018_us_state_20m.shp
+│   │   ├── cb_2018_us_state_20m.shp.ea.iso.xml
+│   │   ├── cb_2018_us_state_20m.shp.iso.xml
+│   │   └── cb_2018_us_state_20m.shx
+│   ├── test_data
+│   └── use_election.csv
+├── design_process.png
+├── docs
+│   ├── Component_Specification.md
+│   ├── Functional_Specification.md
+│   ├── project_final_presentation.pdf
+│   ├── project_preview.pdf
+│   └── project_technology_review.pdf
+├── environment.yml
+├── example
+│   ├── demo_for_all_funcitons.ipynb
+│   ├── demo_plot_all_states.gif
+│   ├── demo_swing_states.gif
+│   ├── plot_all_states.html
+│   └── plot_swingstate.html
+├── setup.py
+└── tree.txt
+
+9 directories, 65 files

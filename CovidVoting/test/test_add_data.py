@@ -108,7 +108,7 @@ class TestAddData(unittest.TestCase):
                                "wrongname", "States", all_states,
                                "testresults.csv")
 
-    def test_edge(self):
+    def test_edge_add_data_csv(self):
         """Edge Tests
         Args:
             self
@@ -116,11 +116,15 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
+        base_data = "./data/raw_2_covid_latest.csv"
+        new_data = "./data/use_election.csv"
+        base_state_col = "wrongname"
+        new_state_col = 'state'
+        use_state = all_states
+        how_join = 'right'
         with self.assertRaises(KeyError):
-            add_data_csv('data/basedata.csv',
-                         'data/raw_3_2020election.csv',
-                         "wrongname", "States", all_states,
-                         "testresults.csv")
+            add_data_csv(base_data, new_data, "wrongname", "state",
+                       all_states, how_join)
 
 if __name__ == '__main__':
     unittest.main()

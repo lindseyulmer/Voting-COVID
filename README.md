@@ -20,9 +20,10 @@ Prepare the data you will be adding as a csv.
 #### Step 2: Add Data
 Use the add_data function from `add_data.py` to add your desired data. It is recommended to use basedata.csv from the data directory as the starting directory so that you are adding your data onto to a csv that already contains the necessary geopandas information. The basedata.csv contains geopandas and cdc covid case data.
 #### Step 3-1: Make Maps for all states
+![](example/demo_plot_all_states.gif)
 We can use functions in `make_plot_2020_and_2016.py` to build two maps to view the election results and covid data.
 #### Step 3-2: Make Plots for the swing states
-![](example/demo_swingstate.gif)
+![](example/demo_swing_states.gif)
 We can use functions in `make_plot_swings.py` to build a map to view the election results in the map. Also, we can make scatter plots to show two variables' relationships in the swing states. We also provide the making bar chart function to compared one variable for the key states in the 2016 and 2020 elections. We can view more details when we move our cursor to specific rectangles. Last, our time series function can help you show one attribute in the time series plot for states where each party won in the election.
 #### Example of using our module
 We have the example codes of using our module in `main.py`. You can find the results in the directory `example`.
@@ -42,32 +43,46 @@ We have the example codes of using our module in `main.py`. You can find the res
 #### make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
     -Make time series plot the examples in main.py is for just swing states, but it could be used for all states as well
 ## Directory Structure
+#### Directories:
+- CovidVoting
+    * This directory holds the code for preparing data for visualization and making interactive plots to show Covid counts and voting results simultaneously. It also contains unit tests to prove the functionalities of each module.
+- data
+    * This directory contains data downloaded from multiple sources, including election results data from 2016 and 2020, Covid related data, and shapefile data that stores the geometric information of the United States.
+- docs
+    * This directory contains documentation including the functional specification, the design specification, the component specification and the final project presentation.
+- example
+    * This directory includes examples of using the functions in the CovidVoting directory.
+#### Structure
 ```bash  
 ├── CovidVoting
 │   ├── __init__.py
 │   ├── __pycache__
 │   │   ├── __init__.cpython-37.pyc
-│   │   ├── make_plot_swingstate.cpython-37.pyc
-│   │   └── test_make_plot_swingstate.cpython-37.pyc
+│   │   ├── add_data.cpython-37.pyc
+│   │   ├── make_plot_2020_and_2016.cpython-37.pyc
+│   │   └── make_plot_swingstate.cpython-37.pyc
 │   ├── add_data.py
-│   ├── main.py
 │   ├── make_plot_2020_and_2016.py
 │   ├── make_plot_swingstate.py
 │   └── test
 │       ├── __init__.py
 │       ├── __pycache__
 │       │   ├── __init__.cpython-37.pyc
+│       │   ├── test_add_data.cpython-37.pyc
+│       │   ├── test_make_plot_2020_and_2016.cpython-37.pyc
 │       │   └── test_make_plot_swingstate.cpython-37.pyc
+│       ├── keystates_covid_2020voting_poll.csv
 │       ├── test_add_data.py
-│       ├── test_add_data_V2.py
 │       ├── test_make_plot_2020_and_2016.py
 │       └── test_make_plot_swingstate.py
-├── LICENSE
+├── LICENSE.md
 ├── README.md
 ├── __init__.py
+├── basedata.csv
 ├── data
-│   ├── __init__.py
 │   ├── basedata.csv
+│   ├── covid_daily_swing.csv
+│   ├── covid_election.csv
 │   ├── coviddataand2020Election.csv
 │   ├── data_formatting.ipynb
 │   ├── keystates_covid_2020voting_poll.csv
@@ -81,7 +96,6 @@ We have the example codes of using our module in `main.py`. You can find the res
 │   ├── raw_7_keystates_covid_voting_issue_poll.csv
 │   ├── raw_8_2020_votebymail.csv
 │   ├── shapefiles
-│   │   ├── __init__.py
 │   │   ├── cb_2018_us_nation_20m.cpg
 │   │   ├── cb_2018_us_nation_20m.dbf
 │   │   ├── cb_2018_us_nation_20m.prj
@@ -96,21 +110,22 @@ We have the example codes of using our module in `main.py`. You can find the res
 │   │   ├── cb_2018_us_state_20m.shp.ea.iso.xml
 │   │   ├── cb_2018_us_state_20m.shp.iso.xml
 │   │   └── cb_2018_us_state_20m.shx
+│   ├── test_data
 │   └── use_election.csv
+├── design_process.png
 ├── docs
 │   ├── Component_Specification.md
-│   ├── Design.md
 │   ├── Functional_Specification.md
-│   ├── TechnologyReview.pdf
-│   └── __init__.py
+│   ├── project_final_presentation.pdf
+│   ├── project_preview.pdf
+│   └── project_technology_review.pdf
 ├── environment.yml
 ├── example
-│   ├── demo_swingstate.gif
+│   ├── demo_for_all_funcitons.ipynb
+│   ├── demo_plot_all_states.gif
+│   ├── demo_swing_states.gif
+│   ├── plot_all_states.html
 │   └── plot_swingstate.html
+├── setup.py
 └── tree.txt
 ```
-- CovidVoting: This directory holds the code for preparing data for visualization and making interactive plots to show Covid counts and voting results simultaneously. It also contains unit tests to prove the functionalities of each module.
-- data: This directory contains data downloaded from multiple sources, including election results data from 2016 and 2020, Covid related data, and shapefile data that stores the geometric information of the United States.
-- docs: This directory contains documentation including the functional specification, the design specification, the component specification and the final project presentation.
-- example: This directory includes examples of using the functions in the CovidVoting directory.
-
