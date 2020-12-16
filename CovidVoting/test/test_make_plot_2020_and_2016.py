@@ -28,7 +28,8 @@ class UnitTests(unittest.TestCase):
         inputs, make_plot function should return a plot with tabs.
         """
         plot = make_plot(df_merge, contiguous_usa)
-        self.assertEqual(str(type(plot)), "<class 'bokeh.models.layouts.Tabs'>")
+        self.assertEqual(str(type(plot)),
+                         "<class 'bokeh.models.layouts.Tabs'>")
 
     def test_edge(self):
         '''

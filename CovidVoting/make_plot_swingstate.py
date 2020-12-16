@@ -139,7 +139,7 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
                  color=factor_cmap(color_col,
                                    palette=color_palette, 
                                    factors=category_list),
-                                   size=10, legend=color_col)
+                 size=10, legend=color_col)
 
     plot.title.text = title
     plot.xaxis.axis_label = x_label
