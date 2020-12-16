@@ -13,18 +13,18 @@ sys.path.append('..')
 
 # Define all states
 all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
-             "Pennsylvania", "Nebraska", "Washington",
-             "Alabama", "Arkansas", "New Mexico", "Texas",
-             "California", "Kentucky", "Georgia", "Wisconsin",
-             "Oregon", "Missouri", "Virginia", "Tennessee",
-             "Louisiana", "New York", "Michigan", "Idaho",
-             "Florida", "Illinois", "Montana", "Minnesota",
-             "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
-             "Connecticut", "New Jersey", "District of Columbia",
-             "North Carolina", "Utah", "North Dakota", "South Carolina",
-             "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
-             "West Virginia", "Maine", "New Hampshire", "Arizona",
-             "Rhode Island"]
+              "Pennsylvania", "Nebraska", "Washington",
+              "Alabama", "Arkansas", "New Mexico", "Texas",
+              "California", "Kentucky", "Georgia", "Wisconsin",
+              "Oregon", "Missouri", "Virginia", "Tennessee",
+              "Louisiana", "New York", "Michigan", "Idaho",
+              "Florida", "Illinois", "Montana", "Minnesota",
+              "Indiana", "Massachusetts", "Kansas", "Nevada", "Vermont",
+              "Connecticut", "New Jersey", "District of Columbia",
+              "North Carolina", "Utah", "North Dakota", "South Carolina",
+              "Mississippi", "Colorado", "South Dakota", "Oklahoma", "Wyoming",
+              "West Virginia", "Maine", "New Hampshire", "Arizona",
+              "Rhode Island"]
 # Define key states
 key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
@@ -33,8 +33,10 @@ key = ["Arizona", "Florida", "Georgia", "Michigan",
 covid = pd.read_csv("data/raw_2_covid_latest.csv")
 election = pd.read_csv("data/use_election.csv")
 election = election.loc[election['state'].isin(all_states)]
-merge_covid_election = pd.merge(left=covid, right=election, how='right',
-                             left_on='State/Territory', right_on='state')
+merge_covid_election = pd.merge(left=covid, 
+                                right=election, how='right',
+                                left_on='State/Territory', right_on='state')
+
 
 class TestAddData(unittest.TestCase):
     """
@@ -49,10 +51,12 @@ class TestAddData(unittest.TestCase):
             True: Test passed
             False: Test failed
         """
+        added_data='data/raw_7_keystates_covid_voting_issue_poll.csv'
+        file_name="CovidVoting/test/keystates_covid_2020voting_poll.csv"
         add_data_shapefile('data/coviddataand2020Election.csv',
-                           'data/raw_7_keystates_covid_voting_issue_poll.csv',
+                           added_data,
                            'NAME', 'States', key,
-                           "CovidVoting/test/keystates_covid_2020voting_poll.csv")
+                           file_name)
 
     def test_smoke_add_data_csv(self):
         """smoke test"""
@@ -63,7 +67,7 @@ class TestAddData(unittest.TestCase):
         use_state = all_states
         how_join = 'right'
         df_covid_election = add_data_csv(base_data, new_data, base_state_col,
-                                       new_state_col, use_state, how_join)
+                                         new_state_col, use_state, how_join)
         self.assertIsNotNone(df_covid_election)
 
     def test_oneshot(self):
@@ -90,8 +94,10 @@ class TestAddData(unittest.TestCase):
         new_state_col = 'state'
         use_state = all_states
         how_join = 'right'
-        df_covid_election = add_data_csv(base_data, new_data, base_state_col,
-                                       new_state_col, use_state, how_join)
+        df_covid_election = add_data_csv(base_data, 
+                                         new_data, base_state_col,
+                                         new_state_col, use_state, 
+                                         how_join)
         pd.testing.assert_frame_equal(df_covid_election, merge_covid_election)
 
     def test_edge(self):
@@ -124,7 +130,8 @@ class TestAddData(unittest.TestCase):
         how_join = 'right'
         with self.assertRaises(KeyError):
             add_data_csv(base_data, new_data, "wrongname", "state",
-                       all_states, how_join)
+                         all_states, how_join)
+
 
 if __name__ == '__main__':
     unittest.main()

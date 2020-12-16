@@ -26,7 +26,7 @@ We can use functions in `make_plot_2020_and_2016.py` to build two maps to view t
 ![](example/demo_swing_states.gif)
 We can use functions in `make_plot_swings.py` to build a map to view the election results in the map. Also, we can make scatter plots to show two variables' relationships in the swing states. We also provide the making bar chart function to compared one variable for the key states in the 2016 and 2020 elections. We can view more details when we move our cursor to specific rectangles. Last, our time series function can help you show one attribute in the time series plot for states where each party won in the election.
 #### Example of using our module
-We have the example codes of using our module in `main.py`. You can find the results in the directory `example`.
+We have the example codes of using our module in `demo_for_all_functions.ipynb`. You can find the codes and results in the directory `example`.
 ## Function Summary
 #### add_data_csv(base_data, new_data, base_state_col, new_state_col, use_state, how_join)
     -Does not process statefiles. Use this to add additional data at state level.
@@ -43,7 +43,7 @@ We have the example codes of using our module in `main.py`. You can find the res
 #### make_plot_time_series(source_df, group_col, use_col, y_label, title, hover_list)
     -Make time series plot the examples in main.py is for just swing states, but it could be used for all states as well
 ## Directory Structure
-#### Directories:
+#### Directories
 - CovidVoting
     * This directory holds the code for preparing data for visualization and making interactive plots to show Covid counts and voting results simultaneously. It also contains unit tests to prove the functionalities of each module.
 - data

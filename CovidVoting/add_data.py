@@ -68,7 +68,7 @@ def add_data_csv(base_data, new_data, base_state_col, new_state_col,
     merged_df = pd.merge(left=base_df, right=new_df, how=how_join,
                          left_on=[base_state_col], right_on=[new_state_col])
     return merged_df
- 
+
 
 def add_data_shapefile(start_data, new_data_file,
                        start_data_state, new_data_state,

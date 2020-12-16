@@ -154,8 +154,10 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         hover_list = [('Date', '@date{%F}'),
                       ('Total Cases (thousands)', '@{tot_cases}{int}')]
         with self.assertRaises(Exception):
-            make_plot_time_series(source_df, group_col,
-                                use_col, y_label, title, hover_list)
-   
+            make_plot_time_series(
+                source_df, group_col,
+                use_col, y_label, title, hover_list)
+
+
 if __name__ == '__main__':
     unittest.main()
