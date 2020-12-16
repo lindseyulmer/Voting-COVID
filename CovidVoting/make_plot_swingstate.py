@@ -137,7 +137,7 @@ def make_plot_scatter(source_df, category_list, color_col, color_palette,
     plot.scatter(x=x_col, y=y_col,
                  source=source_df,
                  color=factor_cmap(color_col,
-                                   palette=color_palette, 
+                                   palette=color_palette,
                                    factors=category_list),
                  size=10, legend=color_col)
 
