@@ -1,5 +1,5 @@
 # Voting-COVID
-[![Build Status](https://travis-ci.org/lindseyulmer/Voting-COVID.svg?branch=main)](https://travis-ci.org/lindseyulmer/Voting-COVID)<br /> [![Coverage Status](https://coveralls.io/repos/github/lindseyulmer/Voting-COVID/badge.svg?branch=main)](https://coveralls.io/github/lindseyulmer/Voting-COVID?branch=main)
+[![Build Status](https://travis-ci.org/lindseyulmer/Voting-COVID.svg?branch=main)](https://travis-ci.org/lindseyulmer/Voting-COVID)<br /> [![Coverage Status](https://coveralls.io/repos/github/lindseyulmer/Voting-COVID/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/lindseyulmer/Voting-COVID?branch=main&kill_cache=1)
 ## Introduction
 The purpose of this project is to use our module to visualize COVID and election data on the same plot, so that people can better discern the political ramifications of the pandemic.
 - Background: The coronavirus pandemic has created unprecedented circumstances in the United States, affecting every aspect of American life including the election process. Rising cases and concern over the government’s response to the pandemic could have greatly influenced how and who Americans voted for. Data on coronavirus cases, election results, and the proportion of mail-in votes are all readily available, but coronavirus and election data are not readily available in the same place for comparison.
