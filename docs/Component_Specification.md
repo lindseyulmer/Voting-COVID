@@ -4,9 +4,13 @@
 The software components are importing data, structuring data to one dataframe and adding shapefile information for use with Geopandas, and creating and exporting the interactive map with Bokeh. Summarizing it is importing data, reformatting data, and creating and exporting map visualizations.
 
 ## Possible Components
-#### `add_data`
+#### `add_data_shapefile`
 - description: prepare data to create figure
 - input: Two data sets as csvs, the new one that's being added on and a datafile containing geopandas shape information
+- output: one combined data set as a csv
+#### `add_data_csv`
+- description: prepare data to create figure
+- input: Two data sets as csvs without geopandas shape information
 - output: one combined data set as a csv
 #### `make_plot_2020_and_2016`
 - description: make plots with the preloaded data for all states

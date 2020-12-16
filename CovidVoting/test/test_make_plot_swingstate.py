@@ -141,6 +141,21 @@ class UnitTestsMakePlotSwing(unittest.TestCase):
         self.assertEqual(str(type(plot)),
                          "<class 'bokeh.plotting.figure.Figure'>")
 
-        
+    def test_edge(self):
+        '''
+        This is an edge test that proves our code catches a type error when
+        the take in parameter is invalid.
+        '''
+        source_df = df_covid_daily_swing
+        group_col = 'win_2020'
+        use_col = 'tot_cases'
+        y_label = ['total cases (thousands)']
+        title = 'total cumulative cases for states each party won in 2020'
+        hover_list = [('Date', '@date{%F}'),
+                      ('Total Cases (thousands)', '@{tot_cases}{int}')]
+        with self.assertRaises(Exception):
+            make_plot_time_series(source_df, group_col,
+                                use_col, y_label, title, hover_list)
+   
 if __name__ == '__main__':
     unittest.main()

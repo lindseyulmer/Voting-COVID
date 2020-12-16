@@ -12,7 +12,7 @@ from CovidVoting.add_data import (add_data_csv,
 sys.path.append('..')
 
 # Define all states
-allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
+all_states = ["Maryland", "Iowa", "Delaware", "Ohio",
              "Pennsylvania", "Nebraska", "Washington",
              "Alabama", "Arkansas", "New Mexico", "Texas",
              "California", "Kentucky", "Georgia", "Wisconsin",
@@ -29,7 +29,12 @@ allstates = ["Maryland", "Iowa", "Delaware", "Ohio",
 key = ["Arizona", "Florida", "Georgia", "Michigan",
        "Minnesota", "North Carolina", "Ohio",
        "Pennsylvania", "Texas", "Wisconsin"]
-
+# prepare data for one shot test
+covid = pd.read_csv("data/raw_2_covid_latest.csv")
+election = pd.read_csv("data/use_election.csv")
+election = election.loc[election['state'].isin(all_states)]
+merge_covid_election = pd.merge(left=covid, right=election, how='right',
+                             left_on='State/Territory', right_on='state')
 
 class TestAddData(unittest.TestCase):
     """
@@ -48,8 +53,18 @@ class TestAddData(unittest.TestCase):
                            'data/raw_7_keystates_covid_voting_issue_poll.csv',
                            'NAME', 'States', key,
                            "CovidVoting/test/keystates_covid_2020voting_poll.csv")
-        add_data_csv('data/basedata.csv', 'data/raw_3_2020election.csv', "NAME", "States",
-                     allstates, "left")
+
+    def test_smoke_add_data_csv(self):
+        """smoke test"""
+        base_data = "./data/raw_2_covid_latest.csv"
+        new_data = "./data/use_election.csv"
+        base_state_col = 'State/Territory'
+        new_state_col = 'state'
+        use_state = all_states
+        how_join = 'right'
+        df_covid_election = add_data_csv(base_data, new_data, base_state_col,
+                                       new_state_col, use_state, how_join)
+        self.assertIsNotNone(df_covid_election)
 
     def test_oneshot(self):
         """One shot tests
@@ -67,6 +82,18 @@ class TestAddData(unittest.TestCase):
         self.assertEqual(
                          df.columns.all(), df2.columns.all())
 
+    def test_oneshot_add_data_csv(self):
+        """oneshot test"""
+        base_data = "./data/raw_2_covid_latest.csv"
+        new_data = "./data/use_election.csv"
+        base_state_col = 'State/Territory'
+        new_state_col = 'state'
+        use_state = all_states
+        how_join = 'right'
+        df_covid_election = add_data_csv(base_data, new_data, base_state_col,
+                                       new_state_col, use_state, how_join)
+        pd.testing.assert_frame_equal(df_covid_election, merge_covid_election)
+
     def test_edge(self):
         """Edge Tests
         Args:
@@ -78,9 +105,22 @@ class TestAddData(unittest.TestCase):
         with self.assertRaises(KeyError):
             add_data_shapefile('data/basedata.csv',
                                'data/raw_3_2020election.csv',
-                               "wrongname", "States", allstates,
+                               "wrongname", "States", all_states,
                                "testresults.csv")
 
+    def test_edge(self):
+        """Edge Tests
+        Args:
+            self
+        Returns:
+            True: Test passed
+            False: Test failed
+        """
+        with self.assertRaises(KeyError):
+            add_data_csv('data/basedata.csv',
+                         'data/raw_3_2020election.csv',
+                         "wrongname", "States", all_states,
+                         "testresults.csv")
 
 if __name__ == '__main__':
     unittest.main()

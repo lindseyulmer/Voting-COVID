@@ -1,29 +1,36 @@
+8 directories, 57 files
 .
 ├── CovidVoting
 │   ├── __init__.py
 │   ├── __pycache__
 │   │   ├── __init__.cpython-37.pyc
+│   │   ├── add_data.cpython-37.pyc
+│   │   ├── add_data_2.cpython-37.pyc
+│   │   ├── make_plot_2020_and_2016.cpython-37.pyc
 │   │   ├── make_plot_swingstate.cpython-37.pyc
 │   │   └── test_make_plot_swingstate.cpython-37.pyc
 │   ├── add_data.py
-│   ├── main.py
 │   ├── make_plot_2020_and_2016.py
 │   ├── make_plot_swingstate.py
 │   └── test
 │       ├── __init__.py
 │       ├── __pycache__
 │       │   ├── __init__.cpython-37.pyc
+│       │   ├── test_add_data.cpython-37.pyc
+│       │   ├── test_make_plot_2020_and_2016.cpython-37.pyc
 │       │   └── test_make_plot_swingstate.cpython-37.pyc
+│       ├── keystates_covid_2020voting_poll.csv
 │       ├── test_add_data.py
-│       ├── test_add_data_V2.py
 │       ├── test_make_plot_2020_and_2016.py
 │       └── test_make_plot_swingstate.py
-├── LICENSE
+├── LICENSE.md
 ├── README.md
 ├── __init__.py
+├── basedata.csv
 ├── data
-│   ├── __init__.py
 │   ├── basedata.csv
+│   ├── covid_daily_swing.csv
+│   ├── covid_election.csv
 │   ├── coviddataand2020Election.csv
 │   ├── data_formatting.ipynb
 │   ├── keystates_covid_2020voting_poll.csv
@@ -37,7 +44,6 @@
 │   ├── raw_7_keystates_covid_voting_issue_poll.csv
 │   ├── raw_8_2020_votebymail.csv
 │   ├── shapefiles
-│   │   ├── __init__.py
 │   │   ├── cb_2018_us_nation_20m.cpg
 │   │   ├── cb_2018_us_nation_20m.dbf
 │   │   ├── cb_2018_us_nation_20m.prj
@@ -52,17 +58,22 @@
 │   │   ├── cb_2018_us_state_20m.shp.ea.iso.xml
 │   │   ├── cb_2018_us_state_20m.shp.iso.xml
 │   │   └── cb_2018_us_state_20m.shx
+│   ├── test_data
 │   └── use_election.csv
+├── design_process.png
 ├── docs
 │   ├── Component_Specification.md
-│   ├── Design.md
 │   ├── Functional_Specification.md
 │   ├── TechnologyReview.pdf
-│   └── __init__.py
+│   └── projectpreview.pdf
 ├── environment.yml
 ├── example
+│   ├── demo_for_all_funcitons.ipynb
 │   ├── demo_swingstate.gif
+│   ├── make_plot_all_states.gif
+│   ├── plot_all_states.html
 │   └── plot_swingstate.html
+├── setup.py
 └── tree.txt
 
-8 directories, 57 files
+9 directories, 68 files
